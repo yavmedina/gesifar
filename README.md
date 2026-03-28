@@ -29,7 +29,7 @@ Proyecto final para la carrera de Analista de Sistemas - Gestión de inventario 
 ## 📝 Instalación
 ```bash
 # Clonar el repositorio
-git clone https://github.com/yavmedina/farmacia.git
+git clone https://github.com/yavmedina/gesifar.git
 
 # Configurar base de datos
 # Importar database.sql en MySQL

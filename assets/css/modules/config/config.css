@@ -1,0 +1,36 @@
+        .config-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .config-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 2px solid #e5e7eb;
+        }
+        
+        .config-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: #3b82f6;
+        }
+        
+        .config-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        
+        .config-card h3 {
+            margin: 15px 0;
+            color: #1f2937;
+        }
+        
+        .config-card p {
+            color: #6b7280;
+            margin-bottom: 20px;
+        }

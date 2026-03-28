@@ -1,0 +1,57 @@
+/* ============================================
+   GESIFAR - ALERTAS DE STOCK
+   ============================================ */
+
+.alert-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.alert-stat-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid;
+}
+
+.alert-stat-card h3 {
+    margin: 0 0 10px 0;
+    font-size: 32px;
+}
+
+.alert-stat-card p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.stat-sin-stock { border-left-color: #ef4444; }
+.stat-sin-stock h3 { color: #ef4444; }
+
+.stat-vencido { border-left-color: #dc2626; }
+.stat-vencido h3 { color: #dc2626; }
+
+.stat-proximo-vencer { border-left-color: #a855f7; }
+.stat-proximo-vencer h3 { color: #a855f7; }
+
+.stat-generar-pedido { border-left-color: #f59e0b; }
+.stat-generar-pedido h3 { color: #f59e0b; }
+
+.stat-stock-bajo { border-left-color: #eab308; }
+.stat-stock-bajo h3 { color: #eab308; }
+
+.stat-sobrestock { border-left-color: #3b82f6; }
+.stat-sobrestock h3 { color: #3b82f6; }
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #6b7280;
+}
+
+.empty-state-icon {
+    font-size: 64px;
+    margin-bottom: 20px;
+}

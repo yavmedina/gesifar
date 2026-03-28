@@ -1,0 +1,167 @@
+/* ============================================
+   GESIFAR - MÓDULO DE STOCK - CSS GENERAL
+   ============================================ */
+
+a:link, a:visited, a:hover, a:active {
+  text-decoration: none;
+}
+
+/* Badges de alertas */
+.alert-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.alert-SIN_STOCK { background: #fee; color: #c00; }
+.alert-PUNTO_PEDIDO { background: #ffd; color: #960; }
+.alert-STOCK_BAJO { background: #ffe; color: #880; }
+.alert-PROXIMO_VENCER { background: #fef; color: #909; }
+.alert-VENCIDO { background: #fee; color: #c00; }
+.alert-SOBRESTOCK { background: #def; color: #059; }
+.alert-OK { background: #efe; color: #060; }
+
+/* Clasificación ABC */
+.clasificacion-A { color: #c00; font-weight: bold; }
+.clasificacion-B { color: #f60; font-weight: bold; }
+.clasificacion-C { color: #999; }
+
+
+/* Filtros */
+.filters-bar {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    align-items: end;
+}
+
+.filter-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+.filter-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.filter-group input,
+.filter-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* tamaño de los botones filtrar - limpiar - ver sin stock
+   el !important es porque hay un conflicto con style.css padre
+   .filter-select {
+    max-width: 150px !important;
+}
+
+.filter-btn .btn{
+    max-width: 110px !important;
+}
+
+.filter-btn-wide .btn{
+    max-width: 150px !important;
+}
+*/
+
+
+/* Tablas */
+.table-container {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #f8f9fa;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid #dee2e6;
+    font-size: 13px;
+}
+
+td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 13px;
+}
+
+tr:hover {
+    background: #f8f9fa;
+}
+
+/* Acciones en tabla */
+.actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 12px;
+}
+
+.btn-success { background: #10b981; color: white; }
+.btn-info { background: #3b82f6; color: white; }
+.btn-warning { background: #f59e0b; color: white; }
+.btn-danger { background: #ef4444; color: white; }
+
+/* Paginación */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 20px;
+}
+
+.pagination a,
+.pagination span {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #333;
+}
+
+.pagination a:hover {
+    background: #f0f0f0;
+}
+
+.pagination .active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Badges de tipo de movimiento */
+.badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.badge-ingreso { background: #d1fae5; color: #065f46; }
+.badge-egreso { background: #fee2e2; color: #991b1b; }
+.badge-ajuste_positivo { background: #dbeafe; color: #1e40af; }
+.badge-ajuste_negativo { background: #fef3c7; color: #92400e; }
+.badge-devolucion { background: #e0e7ff; color: #3730a3; }
+.badge-vencimiento { background: #f3e8ff; color: #6b21a8; }

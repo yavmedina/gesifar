@@ -1,0 +1,271 @@
+<?php
+session_start();
+
+if(!isset($_SESSION['usuario_id'])) {
+    header("Location: ../../../login.php");
+    exit();
+}
+
+require_once '../../../includes/permisos.php';
+verificarPermiso('stock.alta');
+
+require_once '../../../config/database.php';
+
+$database = new Database();
+$db = $database->getConnection();
+
+$mensaje = '';
+$error = '';
+
+// Procesar formulario
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Obtener datos
+    $nombre = trim($_POST['nombre']);
+    $nombre_comercial = trim($_POST['nombre_comercial']);
+    $principio_activo = trim($_POST['principio_activo']);
+    $concentracion = trim($_POST['concentracion']);
+    $id_tipo_material = (int)$_POST['id_tipo_material'];
+    $id_forma_farmaceutica = !empty($_POST['id_forma_farmaceutica']) ? (int)$_POST['id_forma_farmaceutica'] : null;
+    $id_presentacion = !empty($_POST['id_presentacion']) ? (int)$_POST['id_presentacion'] : null;
+    $id_proveedor = (int)$_POST['id_proveedor'];
+    
+    $stock_minimo = (int)$_POST['stock_minimo'];
+    $punto_pedido = (int)$_POST['punto_pedido'];
+    $stock_maximo = (int)$_POST['stock_maximo'];
+    $clasificacion_abc = $_POST['clasificacion_abc'];
+    
+    $requiere_receta = isset($_POST['requiere_receta']) ? 1 : 0;
+    $psicofarmacos = isset($_POST['psicofarmacos']) ? 1 : 0;
+    $controlado = isset($_POST['controlado']) ? 1 : 0;
+    
+    // Validar
+    if(empty($nombre) || $id_tipo_material == 0 || $id_proveedor == 0) {
+        $error = "Complete todos los campos obligatorios";
+    } else {
+        try {
+            // Generar código automático
+            $query_last = "SELECT codigo FROM material WHERE codigo LIKE 'MAT-%' ORDER BY id_material DESC LIMIT 1";
+            $stmt_last = $db->query($query_last);
+            $last = $stmt_last->fetch(PDO::FETCH_ASSOC);
+            
+            if($last) {
+                $num = (int)substr($last['codigo'], 4) + 1;
+                $codigo = 'MAT-' . str_pad($num, 4, '0', STR_PAD_LEFT);
+            } else {
+                $codigo = 'MAT-0001';
+            }
+            
+            // Insertar material
+            $query = "INSERT INTO material (
+                codigo, nombre, nombre_comercial, principio_activo, concentracion,
+                stock_actual, stock_minimo, stock_maximo, punto_pedido,
+                clasificacion_abc, requiere_receta, psicofarmacos, controlado,
+                id_tipo_material, id_forma_farmaceutica, id_presentacion, id_proveedor,
+                activo
+            ) VALUES (
+                :codigo, :nombre, :nombre_comercial, :principio_activo, :concentracion,
+                0, :stock_minimo, :stock_maximo, :punto_pedido,
+                :clasificacion_abc, :requiere_receta, :psicofarmacos, :controlado,
+                :id_tipo_material, :id_forma_farmaceutica, :id_presentacion, :id_proveedor,
+                1
+            )";
+            
+            $stmt = $db->prepare($query);
+            $stmt->bindParam(':codigo', $codigo);
+            $stmt->bindParam(':nombre', $nombre);
+            $stmt->bindParam(':nombre_comercial', $nombre_comercial);
+            $stmt->bindParam(':principio_activo', $principio_activo);
+            $stmt->bindParam(':concentracion', $concentracion);
+            $stmt->bindParam(':stock_minimo', $stock_minimo);
+            $stmt->bindParam(':stock_maximo', $stock_maximo);
+            $stmt->bindParam(':punto_pedido', $punto_pedido);
+            $stmt->bindParam(':clasificacion_abc', $clasificacion_abc);
+            $stmt->bindParam(':requiere_receta', $requiere_receta);
+            $stmt->bindParam(':psicofarmacos', $psicofarmacos);
+            $stmt->bindParam(':controlado', $controlado);
+            $stmt->bindParam(':id_tipo_material', $id_tipo_material);
+            $stmt->bindParam(':id_forma_farmaceutica', $id_forma_farmaceutica);
+            $stmt->bindParam(':id_presentacion', $id_presentacion);
+            $stmt->bindParam(':id_proveedor', $id_proveedor);
+            
+            if($stmt->execute()) {
+                header("Location: ../index.php?msg=Material dado de alta correctamente - Código: $codigo");
+                exit();
+            }
+        } catch(PDOException $e) {
+            $error = "Error al guardar: " . $e->getMessage();
+        }
+    }
+}
+
+// Obtener datos para selects
+$tipos = $db->query("SELECT * FROM tipo_material ORDER BY descripcion")->fetchAll(PDO::FETCH_ASSOC);
+$formas = $db->query("SELECT * FROM forma_farmaceutica ORDER BY descripcion")->fetchAll(PDO::FETCH_ASSOC);
+$presentaciones = $db->query("SELECT * FROM presentacion ORDER BY descripcion")->fetchAll(PDO::FETCH_ASSOC);
+$proveedores = $db->query("SELECT * FROM proveedor WHERE activo = 1 ORDER BY razon_social")->fetchAll(PDO::FETCH_ASSOC);
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GESIFAR - Dar de Alta Material</title>
+    <link rel="stylesheet" href="/gesifar/assets/css/style.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock_form.css">
+</head>
+<body>
+    <?php include '../../../includes/header.php'; ?>
+    
+    <div class="container">
+        <div class="page-header">
+            <h1>➕ Dar de Alta Nuevo Material</h1>
+            <p>Registrar nuevo material en el catálogo del sistema</p>
+        </div>
+        
+        <?php if($error): ?>
+            <div class="alert alert-error"><?php echo $error; ?></div>
+        <?php endif; ?>
+        
+        <div class="form-container">
+            <form method="POST" action="">
+                <h3 class="section-title">Información Básica</h3>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Nombre Genérico <span class="required">*</span></label>
+                        <input type="text" name="nombre" required placeholder="Ej: Paracetamol 500mg">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Nombre Comercial</label>
+                        <input type="text" name="nombre_comercial" placeholder="Ej: Tylenol">
+                    </div>
+                </div>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Principio Activo</label>
+                        <input type="text" name="principio_activo" placeholder="Ej: Paracetamol">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Concentración</label>
+                        <input type="text" name="concentracion" placeholder="Ej: 500mg">
+                    </div>
+                </div>
+                
+                <h3 class="section-title">Clasificación</h3>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Tipo de Material <span class="required">*</span></label>
+                        <select name="id_tipo_material" required>
+                            <option value="">Seleccione...</option>
+                            <?php foreach($tipos as $tipo): ?>
+                                <option value="<?php echo $tipo['id_tipo_material']; ?>">
+                                    <?php echo htmlspecialchars($tipo['descripcion']); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Forma Farmacéutica</label>
+                        <select name="id_forma_farmaceutica">
+                            <option value="">Seleccione...</option>
+                            <?php foreach($formas as $forma): ?>
+                                <option value="<?php echo $forma['id_forma_farmaceutica']; ?>">
+                                    <?php echo htmlspecialchars($forma['descripcion']); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Presentación</label>
+                        <select name="id_presentacion">
+                            <option value="">Seleccione...</option>
+                            <?php foreach($presentaciones as $pres): ?>
+                                <option value="<?php echo $pres['id_presentacion']; ?>">
+                                    <?php echo htmlspecialchars($pres['descripcion']); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Proveedor Principal <span class="required">*</span></label>
+                        <select name="id_proveedor" required>
+                            <option value="">Seleccione...</option>
+                            <?php foreach($proveedores as $prov): ?>
+                                <option value="<?php echo $prov['id_proveedor']; ?>">
+                                    <?php echo htmlspecialchars($prov['razon_social']); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                
+                <h3 class="section-title">Control de Stock</h3>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Stock Mínimo <span class="required">*</span></label>
+                        <input type="number" name="stock_minimo" required min="0" value="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Punto de Pedido <span class="required">*</span></label>
+                        <input type="number" name="punto_pedido" required min="0" value="0">
+                    </div>
+                </div>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Stock Máximo <span class="required">*</span></label>
+                        <input type="number" name="stock_maximo" required min="0" value="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Clasificación ABC</label>
+                        <select name="clasificacion_abc">
+                            <option value="C">C - Bajo valor/volumen</option>
+                            <option value="B">B - Valor/volumen medio</option>
+                            <option value="A">A - Alto valor/volumen</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <h3 class="section-title">Control Normativo</h3>
+                
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" name="requiere_receta">
+                        Requiere Receta Médica
+                    </label>
+                    
+                    <label>
+                        <input type="checkbox" name="psicofarmacos">
+                        Psicofármaco
+                    </label>
+                    
+                    <label>
+                        <input type="checkbox" name="controlado">
+                        Medicamento Controlado
+                    </label>
+                </div>
+                
+                <div class="form-actions">
+                    <a href="../index.php" class="btn" style="background: #6c757d; color: white;">Cancelar</a>
+                    <button type="submit" class="btn btn-primary">Dar de Alta Material</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <?php include '../../../includes/footer.php'; ?>
+</body>
+</html>

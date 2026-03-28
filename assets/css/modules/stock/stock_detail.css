@@ -1,0 +1,139 @@
+/* ============================================
+   GESIFAR - DETALLE DE MATERIAL
+   ============================================ */
+
+.detail-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.detail-header {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.detail-header h1 {
+    margin: 0 0 10px 0;
+    color: #1f2937;
+}
+
+.detail-header .subtitle {
+    color: #6b7280;
+    font-size: 16px;
+}
+
+
+.detail-horizontal {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.detail-horizontal h1 {
+    margin: 0 0 10px 0;
+    color: #1f2937;
+}
+
+.detail-horizontal .subtitle {
+    color: #6b7280;
+    font-size: 16px;
+}
+
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.detail-card {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.detail-card h3 {
+    margin: 0 0 20px 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e5e7eb;
+    font-size: 18px;
+}
+
+.detail-card h3.info-section {
+    border-bottom: none;  /* anula la línea de abajo, de la propiedad que está arriba*/
+    border-top: 2px solid #e5e7eb;  /* línea arriba */
+    padding-top: 10px;  /* espacio arriba */
+    margin-top: 10px;  /* separación de lo de arriba */
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-weight: 500;
+    color: #6b7280;
+}
+
+.detail-value {
+    color: #1f2937;
+    font-weight: 500;
+}
+
+.stock-visual {
+    height: 30px;
+    background: #e5e7eb;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 10px 0;
+}
+
+.stock-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #10b981, #3b82f6);
+    transition: width 0.3s;
+}
+
+.actions-bar {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* AGREGADO PARA CORREGIR VISTA DE DETALLE */
+
+/* Grid 2 columnas */
+.detail-grid-2col {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+/* Grid 3 columnas */
+.detail-grid-3col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+/* Responsive: en pantallas chicas apilan */
+@media (max-width: 768px) {
+    .detail-grid-2col,
+    .detail-grid-3col {
+        grid-template-columns: 1fr;
+    }
+}

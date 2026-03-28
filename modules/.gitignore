@@ -1,0 +1,2 @@
+# Configuración de acceso al servidor de base de datos
+config/database.php

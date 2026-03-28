@@ -1,0 +1,42 @@
+/* ============================================
+   GESIFAR - HISTORIAL DE MOVIMIENTOS
+   ============================================ */
+
+.material-header {
+    background: #f0f9ff;
+    border-left: 4px solid #3b82f6;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.material-header h3 {
+    margin: 0 0 5px 0;
+    color: #1e40af;
+}
+
+.stat-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid;
+}
+
+.stat-ingreso { border-left-color: #10b981; }
+.stat-egreso { border-left-color: #ef4444; }
+.stat-total { border-left-color: #3b82f6; }
+
+.stat-card h3 {
+    margin: 0 0 5px 0;
+    font-size: 28px;
+}
+
+.stat-ingreso h3 { color: #10b981; }
+.stat-egreso h3 { color: #ef4444; }
+.stat-total h3 { color: #3b82f6; }
+
+.stat-card p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 13px;
+}

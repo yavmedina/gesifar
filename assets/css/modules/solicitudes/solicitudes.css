@@ -1,0 +1,59 @@
+/* ============================================
+   GESIFAR - MÓDULO SOLICITUDES (gestión interna)
+   ============================================ */
+
+/* Estado de la solicitud (texto) */
+.estado-sol { font-weight: bold; }
+.estado-sol-pendiente { color: #f59e0b; }
+.estado-sol-aprobada  { color: #10b981; }
+.estado-sol-rechazada { color: #ef4444; }
+.estado-sol-entregada { color: #3b82f6; }
+.estado-sol-otro      { color: #666; }
+
+/* Estado de la solicitud (etiqueta grande en el detalle) */
+.estado-sol-badge {
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 16px;
+}
+.estado-sol-badge.estado-sol-pendiente { background: #f59e0b; color: white; }
+.estado-sol-badge.estado-sol-aprobada  { background: #10b981; color: white; }
+.estado-sol-badge.estado-sol-rechazada { background: #ef4444; color: white; }
+.estado-sol-badge.estado-sol-entregada { background: #3b82f6; color: white; }
+.estado-sol-badge.estado-sol-otro      { background: #666;    color: white; }
+
+/* Revisión de ítems */
+.item-revisar {
+    background: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #3b82f6;
+}
+
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.checkbox-aprobar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+}
+
+.checkbox-aprobar input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+}
+
+.checkbox-aprobar label {
+    margin: 0;
+    font-weight: bold;
+    color: #10b981;
+}

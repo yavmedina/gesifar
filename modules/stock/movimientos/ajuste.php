@@ -96,8 +96,9 @@ $materiales = $db->query("SELECT id_material, codigo, nombre, stock_actual FROM 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESIFAR - Ajuste de Inventario</title>
     <link rel="stylesheet" href="/gesifar/assets/css/style.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/components.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/utilities.css">
     <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock.css">
-    <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock_form.css">
     <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock_movimiento.css">
 </head>
 <body>
@@ -157,7 +158,7 @@ $materiales = $db->query("SELECT id_material, codigo, nombre, stock_actual FROM 
                 </div>
                 
                 <div class="form-actions">
-                    <a href="../index.php" class="btn" style="background: #6c757d; color: white;">Cancelar</a>
+                    <a href="../index.php" class="btn btn-secondary">Cancelar</a>
                     <button type="submit" class="btn btn-warning">Registrar Ajuste</button>
                 </div>
             </form>

@@ -1,0 +1,70 @@
+/* ============================================
+   GESIFAR - UTILIDADES
+   Clases chicas de una sola responsabilidad.
+   Reemplazan a los style="" inline.
+   ============================================ */
+
+/* Texto: color */
+.text-muted   { color: #6b7280; }
+.text-light   { color: #999; }
+.text-dark    { color: var(--dark-color); }
+.text-primary { color: #3b82f6; }
+.text-success { color: var(--secondary-color); }
+.text-warning { color: var(--warning-color); }
+.text-danger  { color: var(--danger-color); }
+
+/* Texto: formato */
+.fw-bold   { font-weight: bold; }
+.fw-500    { font-weight: 500; }
+.fs-13     { font-size: 13px; }
+.fs-18     { font-size: 18px; }
+.fs-20     { font-size: 20px; }
+.text-center { text-align: center; }
+.text-right  { text-align: right; }
+.nowrap      { white-space: nowrap; }
+.line-through { text-decoration: line-through; }
+
+/* Links sin subrayado */
+.link-plain { text-decoration: none; color: var(--dark-color); }
+
+/* Márgenes */
+.m-0   { margin: 0; }
+.mt-10 { margin-top: 10px; }
+.mt-15 { margin-top: 15px; }
+.mt-20 { margin-top: 20px; }
+.mt-30 { margin-top: 30px; }
+.mt-40 { margin-top: 40px; }
+.mb-20 { margin-bottom: 20px; }
+.mb-30 { margin-bottom: 30px; }
+.mr-10 { margin-right: 10px; }
+.pb-0  { padding-bottom: 0; }
+
+/* Anchos */
+.w-100     { width: 100%; }
+.maxw-100  { max-width: 100px; }
+.maxw-140  { max-width: 140px; }
+.maxw-200  { max-width: 200px; }
+.maxw-250  { max-width: 250px; }
+
+/* Display / flex / grid */
+.d-inline   { display: inline; }
+.d-block    { display: block; }
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.flex-gap  { display: flex; gap: 10px; }
+.flex-wrap { flex-wrap: wrap; }
+.grid-2    { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
+
+/* Listas con sangría (ej. explicación ABC) */
+.list-indent { margin: 10px 0 0 20px; }
+
+/* Número grande de resumen */
+.big-stat {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 5px 0;
+    color: var(--dark-color);
+}

@@ -36,6 +36,8 @@ $total = count($materiales);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESIFAR - Materiales Sin Stock</title>
     <link rel="stylesheet" href="/gesifar/assets/css/style.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/components.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/utilities.css">
     <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock.css">
 </head>
 <body>
@@ -43,13 +45,13 @@ $total = count($materiales);
     
     <div class="container">
         <div class="page-header">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="flex-between">
                 <div>
                     <h1>🚫 Materiales Sin Stock</h1>
                     <p>Listado de materiales con stock_actual = 0</p>
                 </div>
                 <div>
-                    <a href="index.php" class="btn" style="background: #6c757d; color: white;">← Volver al Stock</a>
+                    <a href="index.php" class="btn btn-secondary">← Volver al Stock</a>
                 </div>
             </div>
         </div>
@@ -60,7 +62,7 @@ $total = count($materiales);
             </div>
         <?php endif; ?>
         
-        <div class="alert" style="background: #fee2e2; color: #991b1b; border: 1px solid #fecaca;">
+        <div class="alert alert-error">
             <strong>Total de materiales sin stock:</strong> <?php echo $total; ?>
         </div>
         
@@ -81,12 +83,12 @@ $total = count($materiales);
                 <tbody>
                     <?php if(count($materiales) > 0): ?>
                         <?php foreach($materiales as $material): ?>
-                            <tr style="background: #fee2e2;">
+                            <tr class="row-danger">
                                 <td><strong><?php echo htmlspecialchars($material['codigo']); ?></strong></td>
                                 <td>
                                     <strong><?php echo htmlspecialchars($material['nombre']); ?></strong>
                                     <?php if(!empty($material['nombre_comercial'])): ?>
-                                        <br><small style="color: #666;"><?php echo htmlspecialchars($material['nombre_comercial']); ?></small>
+                                        <br><small class="text-muted"><?php echo htmlspecialchars($material['nombre_comercial']); ?></small>
                                     <?php endif; ?>
                                 </td>
                                 <td><?php echo $material['icono']; ?> <?php echo ucfirst($material['tipo']); ?></td>
@@ -120,7 +122,7 @@ $total = count($materiales);
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="7" style="text-align: center; padding: 40px; color: #999;">
+                            <td class="empty-message" colspan="7">
                                 ✅ ¡Excelente! No hay materiales sin stock
                             </td>
                         </tr>
@@ -129,8 +131,8 @@ $total = count($materiales);
             </table>
         </div>
         
-        <div style="margin-top: 20px;">
-            <a href="index.php" class="btn" style="background: #6c757d; color: white;">← Volver al Stock</a>
+        <div class="mt-20">
+            <a href="index.php" class="btn btn-secondary">← Volver al Stock</a>
         </div>
     </div>
     

@@ -61,6 +61,8 @@ $stock_total = $material['stock_actual'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESIFAR - Lotes del Material</title>
     <link rel="stylesheet" href="/gesifar/assets/css/style.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/components.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/utilities.css">
     <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock.css">
 </head>
 <body>
@@ -68,7 +70,7 @@ $stock_total = $material['stock_actual'];
     
     <div class="container">
         <div class="page-header">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="flex-between">
                 <div>
                     <h1>📦 Lotes del Material</h1>
                     <p>
@@ -80,13 +82,13 @@ $stock_total = $material['stock_actual'];
                     </p>
                 </div>
                 <div>
-                    <a href="index.php" class="btn" style="background: #6c757d; color: white;">← Volver al Stock</a>
+                    <a href="index.php" class="btn btn-secondary">← Volver al Stock</a>
                 </div>
             </div>
         </div>
         
         <!-- Resumen -->
-        <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 20px;">
+        <div class="stats-grid stats-grid-compact mb-20">
             <div class="stat-card">
                 <div class="stat-icon">📦</div>
                 <div class="stat-content">
@@ -126,7 +128,7 @@ $stock_total = $material['stock_actual'];
                                 <td>
                                     <strong><?php echo $lote['cantidad_actual']; ?></strong>
                                     <?php if($lote['cantidad_actual'] != $lote['cantidad_inicial']): ?>
-                                        <br><small style="color: #666;">Inicial: <?php echo $lote['cantidad_inicial']; ?></small>
+                                        <br><small class="text-muted">Inicial: <?php echo $lote['cantidad_inicial']; ?></small>
                                     <?php endif; ?>
                                 </td>
                                 <td>
@@ -139,11 +141,11 @@ $stock_total = $material['stock_actual'];
                                 <td>
                                     <?php if($lote['dias_para_vencer'] !== null): ?>
                                         <?php if($lote['dias_para_vencer'] < 0): ?>
-                                            <span style="color: #ef4444; font-weight: bold;">
+                                            <span class="text-danger fw-bold">
                                                 Vencido hace <?php echo abs($lote['dias_para_vencer']); ?> días
                                             </span>
                                         <?php elseif($lote['dias_para_vencer'] <= 30): ?>
-                                            <span style="color: #f59e0b; font-weight: bold;">
+                                            <span class="text-warning fw-bold">
                                                 <?php echo $lote['dias_para_vencer']; ?> días
                                             </span>
                                         <?php else: ?>
@@ -156,9 +158,9 @@ $stock_total = $material['stock_actual'];
                                 <td>
                                     <?php
                                     $estado_colors = [
-                                        'VENCIDO' => '#ef4444',
-                                        'PROXIMO_VENCER' => '#f59e0b',
-                                        'VIGENTE' => '#10b981'
+                                        'VENCIDO' => 'text-danger',
+                                        'PROXIMO_VENCER' => 'text-warning',
+                                        'VIGENTE' => 'text-success'
                                     ];
                                     $estado_labels = [
                                         'VENCIDO' => '✗ Vencido',
@@ -166,7 +168,7 @@ $stock_total = $material['stock_actual'];
                                         'VIGENTE' => '✓ Vigente'
                                     ];
                                     ?>
-                                    <span style="color: <?php echo $estado_colors[$lote['estado_lote']]; ?>; font-weight: bold;">
+                                    <span class="<?php echo $estado_colors[$lote['estado_lote']]; ?> fw-bold">
                                         <?php echo $estado_labels[$lote['estado_lote']]; ?>
                                     </span>
                                 </td>
@@ -180,7 +182,7 @@ $stock_total = $material['stock_actual'];
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="7" style="text-align: center; padding: 40px; color: #999;">
+                            <td class="empty-message" colspan="7">
                                 No hay lotes con stock disponible
                             </td>
                         </tr>
@@ -189,9 +191,9 @@ $stock_total = $material['stock_actual'];
             </table>
         </div>
         
-        <div style="margin-top: 20px;">
+        <div class="mt-20">
             <a href="ver.php?id=<?php echo $id_material; ?>" class="btn btn-primary">👁️ Ver Detalle del Material</a>
-            <a href="index.php" class="btn" style="background: #6c757d; color: white;">← Volver al Stock</a>
+            <a href="index.php" class="btn btn-secondary">← Volver al Stock</a>
         </div>
     </div>
     

@@ -17,6 +17,8 @@ verificarPermiso('admin');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESIFAR - Configuración</title>
     <link rel="stylesheet" href="/gesifar/assets/css/style.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/components.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/utilities.css">
     <link rel="stylesheet" href="/gesifar/assets/css/modules/config/config.css">
 </head>
 <body>
@@ -62,8 +64,8 @@ verificarPermiso('admin');
             </div>
         </div>
         
-        <div style="margin-top: 40px; text-align: center;">
-            <a href="../../dashboard.php" class="btn" style="background: #6c757d; color: white;">← Volver al Dashboard</a>
+        <div class="mt-40 text-center">
+            <a href="../../dashboard.php" class="btn btn-secondary">← Volver al Dashboard</a>
         </div>
     </div>
     

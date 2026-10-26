@@ -76,6 +76,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESIFAR - Editar Usuario</title>
     <link rel="stylesheet" href="/gesifar/assets/css/style.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/components.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/utilities.css">
     <link rel="stylesheet" href="/gesifar/assets/css/modules/usuarios/usuarios_form.css">
 </head>
 <body>
@@ -124,15 +126,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="form-group">
                     <div class="checkbox-group">
                         <input type="checkbox" name="activo" id="activo" <?php echo $usuario['activo'] ? 'checked' : ''; ?>>
-                        <label for="activo" style="margin: 0;">Usuario Activo</label>
+                        <label class="m-0" for="activo">Usuario Activo</label>
                     </div>
                     <small>Desmarcar para desactivar el acceso al sistema</small>
                 </div>
                 
                 <div class="form-actions">
-                    <a href="index.php" class="btn" style="background: #6c757d; color: white;">Cancelar</a>
-                    <a href="cambiar_password.php?id=<?php echo $id; ?>" class="btn" style="background: #0891b2; color: white;">🔑 Cambiar Contraseña</a>
-                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    <a href="index.php" class="btn btn-secondary">Cancelar</a>
+                    <a href="cambiar_password.php?id=<?php echo $id; ?>" class="btn btn-info">🔑 Cambiar Contraseña</a>
+                    <button type="submit" class="btn btn-success">Guardar Cambios</button>
                 </div>
             </form>
         </div>

@@ -1,0 +1,49 @@
+/* ============================================
+   GESIFAR - PORTAL PÚBLICO DE SOLICITUDES
+   ============================================ */
+
+.portal-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.portal-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #3b82f6;
+}
+
+.info-profesional {
+    background: #f0f9ff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.item-row {
+    display: grid;
+    grid-template-columns: 1fr 150px;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.success-message {
+    text-align: center;
+    padding: 40px;
+}
+
+.success-message h2 {
+    color: #10b981;
+    font-size: 48px;
+}
+
+.codigo-solicitud {
+    font-size: 24px;
+    color: #3b82f6;
+    margin: 20px 0;
+}

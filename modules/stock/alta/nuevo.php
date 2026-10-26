@@ -125,8 +125,9 @@ $presentaciones = $db->query("SELECT * FROM presentaciones WHERE activo = 1 ORDE
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESIFAR - Dar de Alta Material</title>
     <link rel="stylesheet" href="/gesifar/assets/css/style.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/components.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/utilities.css">
     <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock.css">
-    <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock_form.css">
 
 <!--script de Laura Schell para bloquear el menú desplegable -->
     <script>
@@ -229,7 +230,7 @@ $presentaciones = $db->query("SELECT * FROM presentaciones WHERE activo = 1 ORDE
                                 </option>
                             <?php endforeach; ?>
                         </select>
-                        <small style="color: #6b7280;">Solo para medicamentos</small>
+                        <small class="text-muted">Solo para medicamentos</small>
                     </div>
                 </div>
                 
@@ -239,7 +240,7 @@ $presentaciones = $db->query("SELECT * FROM presentaciones WHERE activo = 1 ORDE
                         <select name="id_presentacion" id="presentacion" required>
                             <option value="">Seleccione primero el tipo de material...</option>
                         </select>
-                        <small style="color: #6b7280;">Se filtra según tipo de material</small>
+                        <small class="text-muted">Se filtra según tipo de material</small>
                     </div>
                 </div>
                 
@@ -293,7 +294,7 @@ $presentaciones = $db->query("SELECT * FROM presentaciones WHERE activo = 1 ORDE
                 </div>
                 
                 <div class="form-actions">
-                    <a href="../index.php" class="btn" style="background: #6c757d; color: white;">Cancelar</a>
+                    <a href="../index.php" class="btn btn-secondary">Cancelar</a>
                     <button type="submit" class="btn btn-primary">Dar de Alta Material</button>
                 </div>
             </form>

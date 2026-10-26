@@ -11,7 +11,7 @@ Proyecto final para la carrera de Analista de Sistemas - Gestión de inventario 
 - **Frontend**: HTML5, CSS3, JavaScript
 - **Backend**: PHP
 - **Base de datos**: MySQL
-- **Servidor**: Apache (Raspberry)/Laragon (para pruebas de implementaciones)
+- **Servidor**: Apache (Raspberry) / Laragon (para pruebas de implementaciones)
 
 ## 📋 Funcionalidades Principales
 

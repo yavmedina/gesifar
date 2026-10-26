@@ -93,6 +93,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESIFAR - Ajuste Individual</title>
     <link rel="stylesheet" href="/gesifar/assets/css/style.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/components.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/utilities.css">
     <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock.css">
     <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock_form.css?v=2">
     <!-- <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock_movimiento.css"> -->
@@ -117,7 +119,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <strong>Stock actual:</strong> <?php echo $material['stock_actual']; ?> unidades
             </div>
             
-            <div class="info-box" style="background: #fef3c7; border-left-color: #f59e0b;">
+            <div class="warning-box">
                 <strong>⚠️ IMPORTANTE:</strong> Esta acción NO modifica el ingreso original. Se registra como movimiento independiente con motivo obligatorio para trazabilidad.
             </div>
             
@@ -185,11 +187,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="form-group">
                     <label>Motivo / Observaciones <span class="required">*</span></label>
                     <textarea name="motivo" rows="4" required placeholder="Ej: Error de carga en ingreso ING-00045 - Cantidad real 100 cajas, no 1000"></textarea>
-                    <small style="color: #ef4444;">⚠️ El motivo es OBLIGATORIO para trazabilidad</small>
+                    <small class="text-danger">⚠️ El motivo es OBLIGATORIO para trazabilidad</small>
                 </div>
                 
                 <div class="form-actions">
-                    <a href="../index.php" class="btn" style="background: #6c757d; color: white;">← Volver</a>
+                    <a href="../index.php" class="btn btn-secondary">← Volver</a>
                     <button type="submit" class="btn btn-warning">🔧 Registrar Movimiento</button>
                 </div>
             </form>

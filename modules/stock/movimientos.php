@@ -116,6 +116,8 @@ $stats = $stmt_stats->fetch(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESIFAR - Historial de Movimientos</title>
     <link rel="stylesheet" href="/gesifar/assets/css/style.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/components.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/utilities.css">
     <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock.css">
     <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock_movimientos.css">
 </head>
@@ -124,16 +126,16 @@ $stats = $stmt_stats->fetch(PDO::FETCH_ASSOC);
     
     <div class="container">
         <div class="page-header">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="flex-between">
                 <div>
                     <h1>📊 Historial de Movimientos</h1>
                     <p>Trazabilidad completa de ingresos y egresos</p>
                 </div>
                 <div>
                     <?php if($material): ?>
-                        <a href="ver.php?id=<?php echo $material['id_material']; ?>" class="btn" style="background: #6c757d; color: white; margin-right: 10px;">← Volver al Material</a>
+                        <a href="ver.php?id=<?php echo $material['id_material']; ?>" class="btn btn-secondary mr-10">← Volver al Material</a>
                     <?php endif; ?>
-                    <a href="index.php" class="btn" style="background: #6c757d; color: white;">Ver Stock</a>
+                    <a href="index.php" class="btn btn-secondary">Ver Stock</a>
                 </div>
             </div>
         </div>
@@ -148,17 +150,17 @@ $stats = $stmt_stats->fetch(PDO::FETCH_ASSOC);
         
         <!-- Estadísticas -->
         <div class="stats-grid">
-            <div class="stat-card stat-ingreso">
+            <div class="mov-stat-card stat-ingreso">
                 <h3><?php echo number_format($stats['total_ingresos']); ?></h3>
                 <p>➕ Total Ingresos</p>
             </div>
             
-            <div class="stat-card stat-egreso">
+            <div class="mov-stat-card stat-egreso">
                 <h3><?php echo number_format($stats['total_egresos']); ?></h3>
                 <p>➖ Total Egresos</p>
             </div>
             
-            <div class="stat-card stat-total">
+            <div class="mov-stat-card stat-total">
                 <h3><?php echo number_format($stats['total_movimientos']); ?></h3>
                 <p>📋 Total Movimientos</p>
             </div>
@@ -193,14 +195,14 @@ $stats = $stmt_stats->fetch(PDO::FETCH_ASSOC);
                 <input type="date" name="fecha_hasta" value="<?php echo htmlspecialchars($fecha_hasta); ?>">
             </div>
             
-            <div class="filter-group" style="max-width: 100px;">
+            <div class="filter-group maxw-100">
                 <label>&nbsp;</label>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Filtrar</button>
+                <button type="submit" class="btn btn-primary w-100">Filtrar</button>
             </div>
             
-            <div class="filter-group" style="max-width: 100px;">
+            <div class="filter-group maxw-100">
                 <label>&nbsp;</label>
-                <a href="movimientos.php<?php echo $id_material > 0 ? '?id='.$id_material : ''; ?>" class="btn" style="width: 100%; text-align: center; background: #6c757d; color: white;">Limpiar</a>
+                <a href="movimientos.php<?php echo $id_material > 0 ? '?id='.$id_material : ''; ?>" class="btn btn-secondary w-100 text-center">Limpiar</a>
             </div>
         </form>
         
@@ -227,12 +229,12 @@ $stats = $stmt_stats->fetch(PDO::FETCH_ASSOC);
                             <tr>
                                 <td>
                                     <?php echo date('d/m/Y', strtotime($mov['fecha'])); ?><br>
-                                    <small style="color: #666;"><?php echo date('H:i', strtotime($mov['hora'])); ?>hs</small>
+                                    <small class="text-muted"><?php echo date('H:i', strtotime($mov['hora'])); ?>hs</small>
                                 </td>
                                 <?php if($id_material == 0): ?>
                                     <td>
                                         <strong><?php echo htmlspecialchars($mov['material_nombre']); ?></strong><br>
-                                        <small style="color: #666;"><?php echo htmlspecialchars($mov['codigo']); ?></small>
+                                        <small class="text-muted"><?php echo htmlspecialchars($mov['codigo']); ?></small>
                                     </td>
                                 <?php endif; ?>
                                 <td>
@@ -243,9 +245,9 @@ $stats = $stmt_stats->fetch(PDO::FETCH_ASSOC);
                                 <td>
                                     <strong>
                                         <?php if(in_array($mov['tipo_movimiento'], ['ingreso', 'ajuste_positivo', 'devolucion'])): ?>
-                                            <span style="color: #10b981;">+<?php echo $mov['cantidad']; ?></span>
+                                            <span class="text-success">+<?php echo $mov['cantidad']; ?></span>
                                         <?php else: ?>
-                                            <span style="color: #ef4444;">-<?php echo $mov['cantidad']; ?></span>
+                                            <span class="text-danger">-<?php echo $mov['cantidad']; ?></span>
                                         <?php endif; ?>
                                     </strong>
                                 </td>
@@ -262,7 +264,7 @@ $stats = $stmt_stats->fetch(PDO::FETCH_ASSOC);
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="<?php echo $id_material == 0 ? '8' : '7'; ?>" style="text-align: center; padding: 40px; color: #999;">
+                            <td class="empty-message" colspan="<?php echo $id_material == 0 ? '8' : '7'; ?>">
                                 No se encontraron movimientos con los filtros aplicados
                             </td>
                         </tr>

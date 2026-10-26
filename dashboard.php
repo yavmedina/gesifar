@@ -37,6 +37,8 @@ $materiales_por_vencer = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESIFAR - Dashboard</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/utilities.css">
 </head>
 <body>
     <?php include 'includes/header.php'; ?>

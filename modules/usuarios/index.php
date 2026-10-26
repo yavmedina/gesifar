@@ -32,6 +32,8 @@ $usuarios_activos = count(array_filter($usuarios, function($u) { return $u['acti
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESIFAR - Usuarios del Sistema</title>
     <link rel="stylesheet" href="/gesifar/assets/css/style.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/components.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/utilities.css">
     <link rel="stylesheet" href="/gesifar/assets/css/modules/usuarios/usuarios.css">
 </head>
 <body>
@@ -39,7 +41,7 @@ $usuarios_activos = count(array_filter($usuarios, function($u) { return $u['acti
     
     <div class="container">
         <div class="page-header">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="flex-between">
                 <div>
                     <h1>👥 Usuarios del Sistema</h1>
                     <p>Gestión de usuarios y roles</p>
@@ -117,7 +119,7 @@ $usuarios_activos = count(array_filter($usuarios, function($u) { return $u['acti
                                 <?php if($usuario['ultimo_acceso']): ?>
                                     <?php echo date('d/m/Y H:i', strtotime($usuario['ultimo_acceso'])); ?>
                                 <?php else: ?>
-                                    <small style="color: #999;">Nunca</small>
+                                    <small class="text-light">Nunca</small>
                                 <?php endif; ?>
                             </td>
                             <td>

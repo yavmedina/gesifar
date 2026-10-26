@@ -73,6 +73,8 @@ $stats = $stmt_stats->fetch(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESIFAR - Detalle Profesional</title>
     <link rel="stylesheet" href="/gesifar/assets/css/style.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/components.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/utilities.css">
     <link rel="stylesheet" href="/gesifar/assets/css/modules/profesionales/profesionales.css">
 </head>
 <body>
@@ -80,13 +82,13 @@ $stats = $stmt_stats->fetch(PDO::FETCH_ASSOC);
     
     <div class="container">
         <div class="page-header">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="flex-between">
                 <div>
                     <h1>👨‍⚕️ Detalle del Profesional</h1>
                     <p>Información completa y historial</p>
                 </div>
                 <div>
-                    <a href="index.php" class="btn" style="background: #6c757d; color: white;">← Volver</a>
+                    <a href="index.php" class="btn btn-secondary">← Volver</a>
                 </div>
             </div>
         </div>
@@ -115,9 +117,9 @@ $stats = $stmt_stats->fetch(PDO::FETCH_ASSOC);
                     <span class="detail-label">Estado:</span>
                     <span class="detail-value">
                         <?php if($profesional['activo']): ?>
-                            <span style="color: #10b981; font-weight: bold;">✓ Activo</span>
+                            <span class="text-success fw-bold">✓ Activo</span>
                         <?php else: ?>
-                            <span style="color: #ef4444; font-weight: bold;">✗ Inactivo</span>
+                            <span class="text-danger fw-bold">✗ Inactivo</span>
                         <?php endif; ?>
                     </span>
                 </div>
@@ -185,7 +187,7 @@ $stats = $stmt_stats->fetch(PDO::FETCH_ASSOC);
                     </tbody>
                 </table>
             <?php else: ?>
-                <p style="text-align: center; color: #999; padding: 40px;">
+                <p class="empty-message">
                     Este profesional no tiene solicitudes registradas aún
                 </p>
             <?php endif; ?>

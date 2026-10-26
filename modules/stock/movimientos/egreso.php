@@ -226,8 +226,9 @@ $todas_presentaciones = $db->query($query_pres)->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESIFAR - Egreso de Stock a Área</title>
     <link rel="stylesheet" href="/gesifar/assets/css/style.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/components.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/utilities.css">
     <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock.css">
-    <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock_form.css">
     <script>
         // Presentaciones en JSON
         const presentaciones = <?php echo json_encode($todas_presentaciones); ?>;
@@ -327,11 +328,11 @@ $todas_presentaciones = $db->query($query_pres)->fetchAll(PDO::FETCH_ASSOC);
         </div>
         
         <?php if(!isset($_SESSION['area_destino'])): ?>
-            <div class="info-box" style="margin-top: 20px;">
+            <div class="info-box mt-20">
                 <strong>⚠️ Debe seleccionar el área de destino antes de agregar materiales</strong>
             </div>
         <?php else: ?>
-            <div class="alert alert-success" style="margin-top: 20px;">
+            <div class="alert alert-success mt-20">
                 <strong>✓ Área seleccionada:</strong> 
                 <?php 
                 $area_sel = array_filter($areas, function($a) { return $a['id_area'] == $_SESSION['area_destino']; });
@@ -346,7 +347,7 @@ $todas_presentaciones = $db->query($query_pres)->fetchAll(PDO::FETCH_ASSOC);
             <h3>Agregar Materiales al Egreso</h3>
             
             <!-- Medicamentos -->
-            <div style="margin-bottom: 30px;">
+            <div class="mb-30">
                 <h4>💊 Medicamentos</h4>
                 <form method="POST">
                     <input type="hidden" name="accion" value="agregar">
@@ -371,7 +372,7 @@ $todas_presentaciones = $db->query($query_pres)->fetchAll(PDO::FETCH_ASSOC);
                                 <select name="id_presentacion_material" id="presentacion_medicamentos" required onchange="actualizarMax('medicamentos')">
                                     <option value="">Seleccione...</option>
                                 </select>
-                                <small id="stock_medicamentos" style="color: #666;"></small>
+                                <small class="text-muted" id="stock_medicamentos"></small>
                             </div>
                         </div>
                         
@@ -382,13 +383,13 @@ $todas_presentaciones = $db->query($query_pres)->fetchAll(PDO::FETCH_ASSOC);
                         
                         <button type="submit" class="btn btn-primary">➕ Agregar</button>
                     <?php else: ?>
-                        <p style="color: #666;">No hay medicamentos con stock disponible</p>
+                        <p class="text-muted">No hay medicamentos con stock disponible</p>
                     <?php endif; ?>
                 </form>
             </div>
             
             <!-- Insumos -->
-            <div style="margin-bottom: 30px;">
+            <div class="mb-30">
                 <h4>🔧 Insumos</h4>
                 <form method="POST">
                     <input type="hidden" name="accion" value="agregar">
@@ -413,7 +414,7 @@ $todas_presentaciones = $db->query($query_pres)->fetchAll(PDO::FETCH_ASSOC);
                                 <select name="id_presentacion_material" id="presentacion_insumos" required onchange="actualizarMax('insumos')">
                                     <option value="">Seleccione...</option>
                                 </select>
-                                <small id="stock_insumos" style="color: #666;"></small>
+                                <small class="text-muted" id="stock_insumos"></small>
                             </div>
                         </div>
                         
@@ -424,7 +425,7 @@ $todas_presentaciones = $db->query($query_pres)->fetchAll(PDO::FETCH_ASSOC);
                         
                         <button type="submit" class="btn btn-primary">➕ Agregar</button>
                     <?php else: ?>
-                        <p style="color: #666;">No hay insumos con stock disponible</p>
+                        <p class="text-muted">No hay insumos con stock disponible</p>
                     <?php endif; ?>
                 </form>
             </div>
@@ -433,7 +434,7 @@ $todas_presentaciones = $db->query($query_pres)->fetchAll(PDO::FETCH_ASSOC);
         
         <!-- Items agregados -->
         <?php if(count($items_temp['medicamentos']) > 0 || count($items_temp['insumos']) > 0): ?>
-            <div class="form-container" style="margin-top: 30px;">
+            <div class="form-container mt-30">
                 <h3>📋 Items a Egresar</h3>
                 
                 <?php if(count($items_temp['medicamentos']) > 0): ?>
@@ -493,11 +494,11 @@ $todas_presentaciones = $db->query($query_pres)->fetchAll(PDO::FETCH_ASSOC);
                 <?php endif; ?>
                 
                 <!-- Finalizar egreso -->
-                <form method="POST" style="margin-top: 30px;">
+                <form class="mt-30" method="POST">
                     <input type="hidden" name="accion" value="finalizar">
                     
                     <div class="form-actions">
-                        <a href="egreso.php?limpiar=1" class="btn" style="background: #6c757d; color: white;">Cancelar</a>
+                        <a href="egreso.php?limpiar=1" class="btn btn-secondary">Cancelar</a>
                         <button type="submit" class="btn btn-primary">✅ Registrar Egreso</button>
                     </div>
                 </form>
@@ -514,8 +515,8 @@ $todas_presentaciones = $db->query($query_pres)->fetchAll(PDO::FETCH_ASSOC);
             ?>
         <?php endif; ?>
         
-        <div style="margin-top: 20px;">
-            <a href="../../stock/index.php" class="btn" style="background: #6c757d; color: white;">← Volver al Stock</a>
+        <div class="mt-20">
+            <a href="../../stock/index.php" class="btn btn-secondary">← Volver al Stock</a>
         </div>
     </div>
     

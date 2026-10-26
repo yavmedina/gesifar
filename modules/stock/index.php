@@ -134,6 +134,8 @@ $stats = $db->query($query_stats)->fetch(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESIFAR - Gestión de Stock</title>
     <link rel="stylesheet" href="/gesifar/assets/css/style.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/components.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/utilities.css">
     <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock.css">
 </head>
 <body>
@@ -141,27 +143,27 @@ $stats = $db->query($query_stats)->fetch(PDO::FETCH_ASSOC);
     
     <div class="container">
         <div class="page-header">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="flex-between">
                 <div>
                     <h1>📦 Gestión de Stock</h1>
                     <p>Control de materiales, medicamentos e insumos</p>
                 </div>
-                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <div class="flex-gap flex-wrap">
                     <?php if(tienePermiso('stock.alta')): ?>
-                        <a href="alta/nuevo.php" class="btn" style="background: #10b981; color: white;">➕ Alta Material</a>
+                        <a href="alta/nuevo.php" class="btn btn-success">➕ Alta Material</a>
                     <?php endif; ?>
                     
                     <?php if(tienePermiso('stock.ingreso')): ?>
-                        <a href="movimientos/ingreso.php" class="btn" style="background: #3b82f6; color: white;">📦 Ingreso</a>
+                        <a href="movimientos/ingreso.php" class="btn btn-info">📦 Ingreso</a>
                     <?php endif; ?>
                     
                     <?php if(tienePermiso('stock.egreso')): ?>
-                        <a href="movimientos/egreso.php" class="btn" style="background: #ef4444; color: white;">📤 Egreso</a>
+                        <a href="movimientos/egreso.php" class="btn btn-danger">📤 Egreso</a>
                     <?php endif; ?>
                     
-                    <a href="alertas.php" class="btn" style="background: #f59e0b; color: white;">⚠️ Alertas</a>
-                    <!-- <a href="abc_analysis.php" class="btn" style="background: #8b5cf6; color: white;">📊 ABC</a> -->
-                    <a href="abc_analysis.php" class="btn" style="background: #8b5cf6; color: white;">📊 ABC</a>
+                    <a href="alertas.php" class="btn btn-warning">⚠️ Alertas</a>
+                    <!-- <a href="abc_analysis.php" class="btn btn-purple">📊 ABC</a> -->
+                    <a href="abc_analysis.php" class="btn btn-purple">📊 ABC</a>
                 </div>
             </div>
         </div>
@@ -175,7 +177,7 @@ $stats = $db->query($query_stats)->fetch(PDO::FETCH_ASSOC);
         <!-- Estadísticas -->
         <div class="stats-grid">
             <?php if(tieneAlgunPermiso(['usuarios.gestionar', 'stock.alta'])): ?>
-                <a href="abc_analysis_costos.php" style="text-decoration: none;">
+                <a class="link-plain" href="abc_analysis_costos.php">
                     <div class="stat-card">
                         <div class="stat-content">
                             <h3>$<?php echo number_format($stats['valor'], 2); ?></h3>
@@ -227,7 +229,7 @@ $stats = $db->query($query_stats)->fetch(PDO::FETCH_ASSOC);
                 <input type="text" name="busqueda" placeholder="Código, nombre, principio activo..." value="<?php echo htmlspecialchars($busqueda); ?>">
             </div>
             
-            <div class="filter-group" style="max-width: 200px;">
+            <div class="filter-group maxw-200">
                 <label>Clasificación ABC</label>
                 <select name="clasificacion">
                     <option value="">Todas</option>
@@ -237,19 +239,19 @@ $stats = $db->query($query_stats)->fetch(PDO::FETCH_ASSOC);
                 </select>
             </div>
             
-            <div class="filter-group" style="max-width: 100px;">
+            <div class="filter-group maxw-100">
                 <label>&nbsp;</label>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Filtrar</button>
+                <button type="submit" class="btn btn-primary w-100">Filtrar</button>
             </div>
             
-            <div class="filter-group" style="max-width: 100px;">
+            <div class="filter-group maxw-100">
                 <label>&nbsp;</label>
-                <a href="index.php" class="btn" style="width: 100%; text-align: center; background: #6c757d; color: white;">Limpiar</a>
+                <a href="index.php" class="btn btn-secondary w-100 text-center">Limpiar</a>
             </div>
             
-            <div class="filter-group" style="max-width: 140px;">
+            <div class="filter-group maxw-140">
                 <label>&nbsp;</label>
-                <a href="sin_stock.php" class="btn" style="width: 100%; text-align: center; background: #ef4444; color: white;">Ver Sin Stock</a>
+                <a href="sin_stock.php" class="btn btn-danger w-100 text-center">Ver Sin Stock</a>
             </div>
         </form>
         
@@ -277,13 +279,13 @@ $stats = $db->query($query_stats)->fetch(PDO::FETCH_ASSOC);
                                 <td>
                                     <strong><?php echo htmlspecialchars($material['nombre']); ?></strong>
                                     <?php if(!empty($material['nombre_comercial'])): ?>
-                                        <br><small style="color: #666;"><?php echo htmlspecialchars($material['nombre_comercial']); ?></small>
+                                        <br><small class="text-muted"><?php echo htmlspecialchars($material['nombre_comercial']); ?></small>
                                     <?php endif; ?>
                                 </td>
                                 <td><?php echo ucfirst($material['tipo']); ?></td>
                                 <td>
                                     <strong><?php echo $material['stock_actual']; ?></strong> / <?php echo $material['stock_maximo']; ?>
-                                    <br><small style="color: #666;">Mín: <?php echo $material['stock_minimo']; ?> | PP: <?php echo $material['punto_pedido']; ?></small>
+                                    <br><small class="text-muted">Mín: <?php echo $material['stock_minimo']; ?> | PP: <?php echo $material['punto_pedido']; ?></small>
                                 </td>
                                 <td>
                                     <span class="clasificacion-<?php echo $material['clasificacion_abc']; ?>">
@@ -294,7 +296,7 @@ $stats = $db->query($query_stats)->fetch(PDO::FETCH_ASSOC);
                                 <td>
                                     <?php if($material['venc_proximo']): ?>
                                         <?php echo date('d/m/Y', strtotime($material['venc_proximo'])); ?>
-                                        <br><small style="color: #666;">(<?php echo $material['dias_vencimiento']; ?> días)</small>
+                                        <br><small class="text-muted">(<?php echo $material['dias_vencimiento']; ?> días)</small>
                                     <?php else: ?>
                                         -
                                     <?php endif; ?>
@@ -327,7 +329,7 @@ $stats = $db->query($query_stats)->fetch(PDO::FETCH_ASSOC);
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="9" style="text-align: center; padding: 40px; color: #999;">
+                            <td class="empty-message" colspan="9">
                                 No se encontraron materiales
                             </td>
                         </tr>

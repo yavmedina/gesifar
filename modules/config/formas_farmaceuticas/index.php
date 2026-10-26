@@ -27,14 +27,15 @@ $formas = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESIFAR - Formas Farmacéuticas</title>
     <link rel="stylesheet" href="/gesifar/assets/css/style.css">
-    <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/components.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/utilities.css">
 </head>
 <body>
     <?php include '../../../includes/header.php'; ?>
     
     <div class="container">
         <div class="page-header">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="flex-between">
                 <div>
                     <h1>💊 Formas Farmacéuticas</h1>
                     <p>Gestionar formas farmacéuticas del sistema</p>
@@ -64,9 +65,9 @@ $formas = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <td><strong><?php echo htmlspecialchars($forma['descripcion']); ?></strong></td>
                             <td>
                                 <?php if($forma['activo']): ?>
-                                    <span style="color: #10b981;">✓ Activo</span>
+                                    <span class="text-success">✓ Activo</span>
                                 <?php else: ?>
-                                    <span style="color: #ef4444;">✗ Inactivo</span>
+                                    <span class="text-danger">✗ Inactivo</span>
                                 <?php endif; ?>
                             </td>
                             <td>
@@ -83,8 +84,8 @@ $formas = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </table>
         </div>
         
-        <div style="margin-top: 20px;">
-            <a href="../index.php" class="btn" style="background: #6c757d; color: white;">← Volver a Configuración</a>
+        <div class="mt-20">
+            <a href="../index.php" class="btn btn-secondary">← Volver a Configuración</a>
         </div>
     </div>
     

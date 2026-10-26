@@ -106,6 +106,8 @@ $materiales_c = $stmt_c->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESIFAR - Análisis ABC</title>
     <link rel="stylesheet" href="/gesifar/assets/css/style.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/components.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/utilities.css">
     <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock.css">
     <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock_abc.css">
 </head>
@@ -115,13 +117,13 @@ $materiales_c = $stmt_c->fetchAll(PDO::FETCH_ASSOC);
     <div class="container">
         <div class="abc-container">
             <div class="page-header">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="flex-between">
                     <div>
                         <h1>📊 Análisis ABC (Ley de Pareto)</h1>
                         <p>Clasificación de materiales según su valor en inventario</p>
                     </div>
                     <div>
-                        <a href="index.php" class="btn" style="background: #6b7280; color: white;">← Volver</a>
+                        <a href="index.php" class="btn btn-secondary">← Volver</a>
                     </div>
                 </div>
             </div>
@@ -130,12 +132,12 @@ $materiales_c = $stmt_c->fetchAll(PDO::FETCH_ASSOC);
             <div class="info-box">
                 <h3>📚 ¿Qué es el Análisis ABC?</h3>
                 <p>El análisis ABC (o Ley de Pareto) clasifica los materiales en tres categorías según su valor en el inventario:</p>
-                <ul style="margin: 10px 0 0 20px;">
-                    <li><strong style="color: #ef4444;">Clase A:</strong> 5-20% de los ítems representan el 60-80% del valor total (alta rotación/valor)</li>
-                    <li><strong style="color: #f59e0b;">Clase B:</strong> 15-25% de los ítems representan el 15-25% del valor (rotación media)</li>
-                    <li><strong style="color: #6b7280;">Clase C:</strong> 60-70% de los ítems representan el 5-10% del valor (baja rotación/valor)</li>
+                <ul class="list-indent">
+                    <li><strong class="text-danger">Clase A:</strong> 5-20% de los ítems representan el 60-80% del valor total (alta rotación/valor)</li>
+                    <li><strong class="text-warning">Clase B:</strong> 15-25% de los ítems representan el 15-25% del valor (rotación media)</li>
+                    <li><strong class="text-muted">Clase C:</strong> 60-70% de los ítems representan el 5-10% del valor (baja rotación/valor)</li>
                 </ul>
-                <p style="margin-top: 10px;"><strong>Uso:</strong> Permite enfocar esfuerzos de control en los materiales más valiosos (Clase A).</p>
+                <p class="mt-10"><strong>Uso:</strong> Permite enfocar esfuerzos de control en los materiales más valiosos (Clase A).</p>
             </div>
             
             <!-- Cards de resumen -->
@@ -163,7 +165,7 @@ $materiales_c = $stmt_c->fetchAll(PDO::FETCH_ASSOC);
             <!-- Totales -->
             
             <!-- Materiales Clase A -->
-            <div class="section-title" style="color: #ef4444;">
+            <div class="section-title text-danger">
                 🔴 Materiales Clase A (Alta Prioridad)
             </div>
             <?php if(count($materiales_a) > 0): ?>
@@ -180,7 +182,7 @@ $materiales_c = $stmt_c->fetchAll(PDO::FETCH_ASSOC);
                             <tr>
                                 <td><strong><?php echo htmlspecialchars($mat['codigo']); ?></strong></td>
                                 <td>
-                                    <a href="ver.php?id=<?php echo $mat['id_material']; ?>" style="text-decoration: none; color: #1f2937;">
+                                    <a class="link-plain" href="ver.php?id=<?php echo $mat['id_material']; ?>">
                                         <strong><?php echo htmlspecialchars($mat['nombre']); ?></strong>
                                     </a>
                                 </td>
@@ -191,11 +193,11 @@ $materiales_c = $stmt_c->fetchAll(PDO::FETCH_ASSOC);
                     </tbody>
                 </table>
             <?php else: ?>
-                <p style="text-align: center; color: #999; padding: 40px;">No hay materiales en Clase A</p>
+                <p class="empty-message">No hay materiales en Clase A</p>
             <?php endif; ?>
             
             <!-- Materiales Clase B (top 10) -->
-            <div class="section-title" style="color: #f59e0b;">
+            <div class="section-title text-warning">
                 🟡 Materiales Clase B (Prioridad Media) - Top 10
             </div>
             <?php if(count($materiales_b) > 0): ?>
@@ -212,7 +214,7 @@ $materiales_c = $stmt_c->fetchAll(PDO::FETCH_ASSOC);
                             <tr>
                                 <td><strong><?php echo htmlspecialchars($mat['codigo']); ?></strong></td>
                                 <td>
-                                    <a href="ver.php?id=<?php echo $mat['id_material']; ?>" style="text-decoration: none; color: #1f2937;">
+                                    <a class="link-plain" href="ver.php?id=<?php echo $mat['id_material']; ?>">
                                         <strong><?php echo htmlspecialchars($mat['nombre']); ?></strong>
                                     </a>
                                 </td>
@@ -222,11 +224,11 @@ $materiales_c = $stmt_c->fetchAll(PDO::FETCH_ASSOC);
                     </tbody>
                 </table>
             <?php else: ?>
-                <p style="text-align: center; color: #999; padding: 40px;">No hay materiales en Clase B</p>
+                <p class="empty-message">No hay materiales en Clase B</p>
             <?php endif; ?>
             
             <!-- Materiales Clase C (top 10) -->
-            <div class="section-title" style="color: #6b7280;">
+            <div class="section-title text-muted">
                 ⚪ Materiales Clase C (Baja Prioridad) - Top 10
             </div>
             <?php if(count($materiales_c) > 0): ?>
@@ -243,7 +245,7 @@ $materiales_c = $stmt_c->fetchAll(PDO::FETCH_ASSOC);
                             <tr>
                                 <td><strong><?php echo htmlspecialchars($mat['codigo']); ?></strong></td>
                                 <td>
-                                    <a href="ver.php?id=<?php echo $mat['id_material']; ?>" style="text-decoration: none; color: #1f2937;">
+                                    <a class="link-plain" href="ver.php?id=<?php echo $mat['id_material']; ?>">
                                         <strong><?php echo htmlspecialchars($mat['nombre']); ?></strong>
                                     </a>
                                 </td>
@@ -252,11 +254,11 @@ $materiales_c = $stmt_c->fetchAll(PDO::FETCH_ASSOC);
                         <?php endforeach; ?>
                     </tbody>
                 </table>
-                <p style="text-align: center; color: #6b7280; padding: 20px; font-size: 13px;">
+                <p class="table-footnote">
                     Mostrando solo los 10 más valiosos de Clase C. <a href="index.php?clasificacion=C">Ver todos →</a>
                 </p>
             <?php else: ?>
-                <p style="text-align: center; color: #999; padding: 40px;">No hay materiales en Clase C</p>
+                <p class="empty-message">No hay materiales en Clase C</p>
             <?php endif; ?>
             
         </div>

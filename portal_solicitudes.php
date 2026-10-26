@@ -152,42 +152,9 @@ $materiales = $db->query("SELECT DISTINCT nombre FROM material WHERE activo = 1 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESIFAR - Solicitud de Materiales</title>
     <link rel="stylesheet" href="assets/css/style.css">
-    <style>
-        .portal-container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 30px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .portal-header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #3b82f6;
-        }
-        .info-profesional {
-            background: #f0f9ff;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        .item-row {
-            display: grid;
-            grid-template-columns: 1fr 150px;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        .success-message {
-            text-align: center;
-            padding: 40px;
-        }
-        .success-message h2 {
-            color: #10b981;
-            font-size: 48px;
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/utilities.css">
+    <link rel="stylesheet" href="assets/css/modules/solicitudes/portal.css">
 </head>
 <body>
     <div class="portal-container">
@@ -215,10 +182,10 @@ $materiales = $db->query("SELECT DISTINCT nombre FROM material WHERE activo = 1 
                     <input type="text" name="matricula" required placeholder="Ej: MN 123456">
                 </div>
                 
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Validar y Continuar</button>
+                <button type="submit" class="btn btn-primary w-100">Validar y Continuar</button>
             </form>
             
-            <div style="text-align: center; margin-top: 20px;">
+            <div class="text-center mt-20">
                 <a href="login.php">← Volver al Login</a>
             </div>
             
@@ -241,7 +208,7 @@ $materiales = $db->query("SELECT DISTINCT nombre FROM material WHERE activo = 1 
                 <input type="hidden" name="accion" value="enviar">
                 
                 <h3>Materiales Solicitados (máximo 5)</h3>
-                <p style="color: #666; margin-bottom: 20px;">Puede escribir el nombre o seleccionar de la lista</p>
+                <p class="text-muted mb-20">Puede escribir el nombre o seleccionar de la lista</p>
                 
                 <datalist id="materiales">
                     <?php foreach($materiales as $mat): ?>
@@ -268,7 +235,7 @@ $materiales = $db->query("SELECT DISTINCT nombre FROM material WHERE activo = 1 
                 </div>
                 
                 <div class="form-actions">
-                    <a href="?cancelar=1" class="btn" style="background: #6c757d; color: white;">Cancelar</a>
+                    <a href="?cancelar=1" class="btn btn-secondary">Cancelar</a>
                     <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
                 </div>
             </form>
@@ -278,13 +245,13 @@ $materiales = $db->query("SELECT DISTINCT nombre FROM material WHERE activo = 1 
             <div class="success-message">
                 <h2>✅</h2>
                 <h1>Solicitud Enviada</h1>
-                <p style="font-size: 24px; color: #3b82f6; margin: 20px 0;">
+                <p class="codigo-solicitud">
                     <strong><?php echo $_SESSION['solicitud_codigo']; ?></strong>
                 </p>
                 <p>Su solicitud ha sido registrada correctamente y será procesada por farmacia.</p>
-                <p style="margin-top: 30px;">
+                <p class="mt-30">
                     <a href="?nueva=1" class="btn btn-primary">Nueva Solicitud</a>
-                    <a href="login.php" class="btn" style="background: #6c757d; color: white;">Volver al Login</a>
+                    <a href="login.php" class="btn btn-secondary">Volver al Login</a>
                 </p>
             </div>
         <?php endif; ?>

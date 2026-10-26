@@ -240,8 +240,9 @@ $todas_presentaciones = $db->query($query_pres)->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESIFAR - Ingreso de Stock</title>
     <link rel="stylesheet" href="/gesifar/assets/css/style.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/components.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/utilities.css">
     <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock.css">
-    <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock_form.css">
     <script>
         const presentaciones = <?php echo json_encode($todas_presentaciones); ?>;
         
@@ -318,11 +319,11 @@ $todas_presentaciones = $db->query($query_pres)->fetchAll(PDO::FETCH_ASSOC);
         </div>
         
         <?php if(!isset($_SESSION['proveedor_ingreso'])): ?>
-            <div class="info-box" style="margin-top: 20px;">
+            <div class="info-box mt-20">
                 <strong>⚠️ Debe seleccionar el proveedor antes de agregar materiales</strong>
             </div>
         <?php else: ?>
-            <div class="alert alert-success" style="margin-top: 20px;">
+            <div class="alert alert-success mt-20">
                 <strong>✓ Proveedor seleccionado:</strong> 
                 <?php 
                 $prov_sel = array_filter($proveedores, function($p) { return $p['id_proveedor'] == $_SESSION['proveedor_ingreso']; });
@@ -337,7 +338,7 @@ $todas_presentaciones = $db->query($query_pres)->fetchAll(PDO::FETCH_ASSOC);
             <h3>Agregar Materiales al Ingreso</h3>
             
             <!-- Medicamentos -->
-            <div style="margin-bottom: 30px;">
+            <div class="mb-30">
                 <h4>💊 Medicamentos</h4>
                 <form method="POST">
                     <input type="hidden" name="accion" value="agregar">
@@ -391,13 +392,13 @@ $todas_presentaciones = $db->query($query_pres)->fetchAll(PDO::FETCH_ASSOC);
                         
                         <button type="submit" class="btn btn-primary">➕ Agregar</button>
                     <?php else: ?>
-                        <p style="color: #666;">No hay medicamentos activos</p>
+                        <p class="text-muted">No hay medicamentos activos</p>
                     <?php endif; ?>
                 </form>
             </div>
             
             <!-- Insumos -->
-            <div style="margin-bottom: 30px;">
+            <div class="mb-30">
                 <h4>🔧 Insumos</h4>
                 <form method="POST">
                     <input type="hidden" name="accion" value="agregar">
@@ -451,7 +452,7 @@ $todas_presentaciones = $db->query($query_pres)->fetchAll(PDO::FETCH_ASSOC);
                         
                         <button type="submit" class="btn btn-primary">➕ Agregar</button>
                     <?php else: ?>
-                        <p style="color: #666;">No hay insumos activos</p>
+                        <p class="text-muted">No hay insumos activos</p>
                     <?php endif; ?>
                 </form>
             </div>
@@ -460,7 +461,7 @@ $todas_presentaciones = $db->query($query_pres)->fetchAll(PDO::FETCH_ASSOC);
         
         <!-- Items agregados -->
         <?php if(count($items_temp['medicamentos']) > 0 || count($items_temp['insumos']) > 0): ?>
-            <div class="form-container" style="margin-top: 30px;">
+            <div class="form-container mt-30">
                 <h3>📋 Items a Ingresar</h3>
                 
                 <?php if(count($items_temp['medicamentos']) > 0): ?>
@@ -532,11 +533,11 @@ $todas_presentaciones = $db->query($query_pres)->fetchAll(PDO::FETCH_ASSOC);
                 <?php endif; ?>
                 
                 <!-- Finalizar ingreso -->
-                <form method="POST" style="margin-top: 30px;">
+                <form class="mt-30" method="POST">
                     <input type="hidden" name="accion" value="finalizar">
                     
                     <div class="form-actions">
-                        <a href="ingreso.php?limpiar=1" class="btn" style="background: #6c757d; color: white;">Cancelar</a>
+                        <a href="ingreso.php?limpiar=1" class="btn btn-secondary">Cancelar</a>
                         <button type="submit" class="btn btn-primary">✅ Registrar Ingreso</button>
                     </div>
                 </form>
@@ -553,8 +554,8 @@ $todas_presentaciones = $db->query($query_pres)->fetchAll(PDO::FETCH_ASSOC);
             ?>
         <?php endif; ?>
         
-        <div style="margin-top: 20px;">
-            <a href="../../stock/index.php" class="btn" style="background: #6c757d; color: white;">← Volver al Stock</a>
+        <div class="mt-20">
+            <a href="../../stock/index.php" class="btn btn-secondary">← Volver al Stock</a>
         </div>
     </div>
     

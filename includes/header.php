@@ -45,13 +45,13 @@ require_once __DIR__ . '/permisos.php';
         </nav>
         
         <div class="user-menu">
-            <div style="text-align: right; margin-right: 15px; white-space: nowrap;">
-                <strong style="display: block; font-size: 13px;">👤 <?php echo $_SESSION['nombre']; ?></strong>
-                <small style="display: block; font-size: 12px; color: #666;">
+            <div class="user-info-text">
+                <strong>👤 <?php echo $_SESSION['nombre']; ?></strong>
+                <small>
                     <?php echo nombreRol($_SESSION['rol']); ?>
                 </small>
             </div>
-            <a href="/gesifar/logout.php" class="btn btn-logout" style="white-space: nowrap;">Cerrar Sesión</a>
+            <a href="/gesifar/logout.php" class="btn btn-logout nowrap">Cerrar Sesión</a>
         </div>
     </div>
 </header>

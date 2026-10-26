@@ -76,6 +76,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESIFAR - Agregar Usuario</title>
     <link rel="stylesheet" href="/gesifar/assets/css/style.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/components.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/utilities.css">
     <link rel="stylesheet" href="/gesifar/assets/css/modules/usuarios/usuarios_form.css">
 </head>
 <body>
@@ -149,7 +151,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 
                 <div class="form-actions">
-                    <a href="index.php" class="btn" style="background: #6c757d; color: white;">Cancelar</a>
+                    <a href="index.php" class="btn btn-secondary">Cancelar</a>
                     <button type="submit" class="btn btn-primary">Crear Usuario</button>
                 </div>
             </form>

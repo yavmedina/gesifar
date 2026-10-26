@@ -60,6 +60,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESIFAR - Login</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/utilities.css">
 </head>
 <body class="login-page">
     <div class="login-container">
@@ -76,8 +78,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             <?php endif; ?>
 
             <!-- INICIO link para pedido de materialse -->
-            <div style="text-align: center; margin-bottom: 20px;">
-                <a href="portal_solicitudes.php" class="btn" style="background: #3b82f6; color: white;">📋 Realizar Solicitud de Materiales</a>
+            <div class="text-center mb-20">
+                <a href="portal_solicitudes.php" class="btn btn-info">📋 Realizar Solicitud de Materiales</a>
             </div>
             <!-- FIN link -->
 

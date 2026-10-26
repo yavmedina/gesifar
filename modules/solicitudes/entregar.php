@@ -195,20 +195,22 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESIFAR - Entregar Solicitud</title>
     <link rel="stylesheet" href="/gesifar/assets/css/style.css">
-    <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/components.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/utilities.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/modules/solicitudes/solicitudes.css">
 </head>
 <body>
     <?php include '../../includes/header.php'; ?>
     
     <div class="container">
         <div class="page-header">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="flex-between">
                 <div>
                     <h1>📦 Generar Entrega</h1>
                     <p><?php echo htmlspecialchars($solicitud['codigo_solicitud']); ?> - <?php echo htmlspecialchars($solicitud['nombre_profesional']); ?></p>
                 </div>
                 <div>
-                    <a href="ver.php?id=<?php echo $id; ?>" class="btn" style="background: #6c757d; color: white;">← Volver</a>
+                    <a href="ver.php?id=<?php echo $id; ?>" class="btn btn-secondary">← Volver</a>
                 </div>
             </div>
         </div>
@@ -235,9 +237,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <td><?php echo $item['cantidad_solicitada']; ?></td>
                             <td>
                                 <?php if($item['stock_actual'] >= $item['cantidad_solicitada']): ?>
-                                    <span style="color: #10b981;">✓ <?php echo $item['stock_actual']; ?></span>
+                                    <span class="text-success">✓ <?php echo $item['stock_actual']; ?></span>
                                 <?php else: ?>
-                                    <span style="color: #ef4444;">⚠️ <?php echo $item['stock_actual']; ?> (Insuficiente)</span>
+                                    <span class="text-danger">⚠️ <?php echo $item['stock_actual']; ?> (Insuficiente)</span>
                                 <?php endif; ?>
                             </td>
                         </tr>
@@ -272,7 +274,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             
             <div class="form-actions">
-                <a href="ver.php?id=<?php echo $id; ?>" class="btn" style="background: #6c757d; color: white;">Cancelar</a>
+                <a href="ver.php?id=<?php echo $id; ?>" class="btn btn-secondary">Cancelar</a>
                 <button type="submit" class="btn btn-success">✅ Generar Egreso y Entregar</button>
             </div>
         </form>

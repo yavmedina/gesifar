@@ -82,6 +82,8 @@ $total_activos = $db->query($query_stats)->fetch(PDO::FETCH_ASSOC)['total'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESIFAR - Profesionales Solicitantes</title>
     <link rel="stylesheet" href="/gesifar/assets/css/style.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/components.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/utilities.css">
     <link rel="stylesheet" href="/gesifar/assets/css/modules/profesionales/profesionales.css">
 </head>
 <body>
@@ -89,7 +91,7 @@ $total_activos = $db->query($query_stats)->fetch(PDO::FETCH_ASSOC)['total'];
     
     <div class="container">
         <div class="page-header">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="flex-between">
                 <div>
                     <h1>👨‍⚕️ Profesionales Solicitantes</h1>
                     <p>Gestión de profesionales autorizados para solicitar materiales</p>
@@ -126,7 +128,7 @@ $total_activos = $db->query($query_stats)->fetch(PDO::FETCH_ASSOC)['total'];
                 <input type="text" name="busqueda" placeholder="DNI, nombre, apellido o matrícula..." value="<?php echo htmlspecialchars($busqueda); ?>">
             </div>
             
-            <div class="filter-group" style="max-width: 250px;">
+            <div class="filter-group maxw-250">
                 <label>Profesión</label>
                 <select name="profesion">
                     <option value="">Todas las profesiones</option>
@@ -138,14 +140,14 @@ $total_activos = $db->query($query_stats)->fetch(PDO::FETCH_ASSOC)['total'];
                 </select>
             </div>
             
-            <div class="filter-group" style="max-width: 100px;">
+            <div class="filter-group maxw-100">
                 <label>&nbsp;</label>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Filtrar</button>
+                <button type="submit" class="btn btn-primary w-100">Filtrar</button>
             </div>
             
-            <div class="filter-group" style="max-width: 100px;">
+            <div class="filter-group maxw-100">
                 <label>&nbsp;</label>
-                <a href="index.php" class="btn" style="width: 100%; text-align: center; background: #6c757d; color: white;">Limpiar</a>
+                <a href="index.php" class="btn btn-secondary w-100 text-center">Limpiar</a>
             </div>
         </form>
         
@@ -182,7 +184,7 @@ $total_activos = $db->query($query_stats)->fetch(PDO::FETCH_ASSOC)['total'];
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="5" style="text-align: center; padding: 40px; color: #999;">
+                            <td class="empty-message" colspan="5">
                                 No se encontraron profesionales con los filtros aplicados
                             </td>
                         </tr>

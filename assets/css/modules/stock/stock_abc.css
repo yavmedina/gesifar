@@ -73,3 +73,7 @@
     border-radius: 8px;
     margin-bottom: 30px;
 }
+
+.chart-container h3 {
+    margin: 0 0 20px 0;
+}

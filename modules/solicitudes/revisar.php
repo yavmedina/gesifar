@@ -123,45 +123,22 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESIFAR - Revisar Solicitud</title>
     <link rel="stylesheet" href="/gesifar/assets/css/style.css">
-    <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock.css">
-    <style>
-        .item-revisar {
-            background: white;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            border-left: 4px solid #3b82f6;
-        }
-        .item-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .checkbox-aprobar {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 16px;
-        }
-        .checkbox-aprobar input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="/gesifar/assets/css/components.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/utilities.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/modules/solicitudes/solicitudes.css">
 </head>
 <body>
     <?php include '../../includes/header.php'; ?>
     
     <div class="container">
         <div class="page-header">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="flex-between">
                 <div>
                     <h1>📝 Revisar Solicitud</h1>
                     <p><?php echo htmlspecialchars($solicitud['codigo_solicitud']); ?> - <?php echo htmlspecialchars($solicitud['nombre_profesional']); ?></p>
                 </div>
                 <div>
-                    <a href="ver.php?id=<?php echo $id; ?>" class="btn" style="background: #6c757d; color: white;">← Volver</a>
+                    <a href="ver.php?id=<?php echo $id; ?>" class="btn btn-secondary">← Volver</a>
                 </div>
             </div>
         </div>
@@ -170,7 +147,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="alert alert-error"><?php echo $error; ?></div>
         <?php endif; ?>
         
-        <div class="info-box" style="margin-bottom: 20px;">
+        <div class="info-box mb-20">
             <strong>ℹ️ Instrucciones:</strong> Marque los items que aprueba. Los no marcados se considerarán rechazados. Indique el motivo de rechazo cuando corresponda.
         </div>
         
@@ -182,25 +159,25 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <div>
                             <strong>Item <?php echo $item['numero_item']; ?>: <?php echo htmlspecialchars($item['nombre_solicitado']); ?></strong>
                             <?php if($item['material_nombre']): ?>
-                                <br><small style="color: #10b981;">✓ <?php echo htmlspecialchars($item['material_nombre']); ?> | Stock: <?php echo $item['stock_actual']; ?></small>
+                                <br><small class="text-success">✓ <?php echo htmlspecialchars($item['material_nombre']); ?> | Stock: <?php echo $item['stock_actual']; ?></small>
                             <?php else: ?>
-                                <br><small style="color: #f59e0b;">⚠️ No identificado en sistema</small>
+                                <br><small class="text-warning">⚠️ No identificado en sistema</small>
                             <?php endif; ?>
                         </div>
                         <div>
-                            <strong style="font-size: 18px;">Cantidad: <?php echo $item['cantidad_solicitada']; ?></strong>
+                            <strong class="fs-18">Cantidad: <?php echo $item['cantidad_solicitada']; ?></strong>
                         </div>
                     </div>
                     
                     <div class="checkbox-aprobar">
                         <input type="checkbox" name="aprobado_<?php echo $item['id_detalle']; ?>" id="aprobado_<?php echo $item['id_detalle']; ?>" 
                                <?php echo ($item['material_nombre'] && $item['stock_actual'] >= $item['cantidad_solicitada']) ? 'checked' : ''; ?>>
-                        <label for="aprobado_<?php echo $item['id_detalle']; ?>" style="margin: 0; font-weight: bold; color: #10b981;">
+                        <label for="aprobado_<?php echo $item['id_detalle']; ?>">
                             ✓ Aprobar este item
                         </label>
                     </div>
                     
-                    <div class="form-group" style="margin-top: 10px;">
+                    <div class="form-group mt-10">
                         <label>Motivo de rechazo (si no se aprueba)</label>
                         <input type="text" name="motivo_<?php echo $item['id_detalle']; ?>" 
                                placeholder="Ej: Sin stock, Incluido en reposición mensual, No corresponde al servicio">
@@ -217,8 +194,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             
             <!-- Botones -->
-            <div class="form-actions" style="margin-top: 30px;">
-                <a href="ver.php?id=<?php echo $id; ?>" class="btn" style="background: #6c757d; color: white;">Cancelar</a>
+            <div class="form-actions mt-30">
+                <a href="ver.php?id=<?php echo $id; ?>" class="btn btn-secondary">Cancelar</a>
                 <button type="submit" class="btn btn-primary">✅ Confirmar Revisión</button>
             </div>
         </form>

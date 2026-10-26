@@ -27,14 +27,15 @@ $areas = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESIFAR - Áreas</title>
     <link rel="stylesheet" href="/gesifar/assets/css/style.css">
-    <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/components.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/utilities.css">
 </head>
 <body>
     <?php include '../../../includes/header.php'; ?>
     
     <div class="container">
         <div class="page-header">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="flex-between">
                 <div>
                     <h1>🏥 Áreas Hospitalarias</h1>
                     <p>Gestionar áreas de dispensación</p>
@@ -60,13 +61,13 @@ $areas = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </thead>
                 <tbody>
                     <?php foreach($areas as $area): ?>
-                        <tr <?php echo !$area['activo'] ? 'style="background: #fee2e2; text-decoration: line-through;"' : ''; ?>>
+                        <tr <?php echo !$area['activo'] ? 'class="row-danger line-through"' : ''; ?>>
                             <td><strong><?php echo htmlspecialchars($area['descripcion']); ?></strong></td>
                             <td>
                                 <?php if($area['activo']): ?>
-                                    <span style="color: #10b981;">✓ Activo</span>
+                                    <span class="text-success">✓ Activo</span>
                                 <?php else: ?>
-                                    <span style="color: #ef4444;">✗ Inactivo (En remodelación)</span>
+                                    <span class="text-danger">✗ Inactivo (En remodelación)</span>
                                 <?php endif; ?>
                             </td>
                             <td>
@@ -83,8 +84,8 @@ $areas = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </table>
         </div>
         
-        <div style="margin-top: 20px;">
-            <a href="../index.php" class="btn" style="background: #6c757d; color: white;">← Volver a Configuración</a>
+        <div class="mt-20">
+            <a href="../index.php" class="btn btn-secondary">← Volver a Configuración</a>
         </div>
     </div>
     

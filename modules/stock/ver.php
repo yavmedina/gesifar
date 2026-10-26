@@ -134,6 +134,8 @@ $movimientos = $stmt_mov->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESIFAR - Detalle Material</title>
     <link rel="stylesheet" href="/gesifar/assets/css/style.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/components.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/utilities.css">
     <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock.css">
     <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock_detail.css">
 </head>
@@ -142,22 +144,22 @@ $movimientos = $stmt_mov->fetchAll(PDO::FETCH_ASSOC);
     
     <div class="container">
         <div class="page-header">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="flex-between">
                 <div>
                     <h1>Detalle de <strong><?php echo htmlspecialchars($material['nombre']); ?></strong></h1>
 
                 </div>
-                <div style="display: flex; gap: 10px;">
+                <div class="flex-gap">
                     <?php if(tienePermiso('stock.ajuste_individual')): ?>
-                        <a href="movimientos/ajuste_individual.php?id=<?php echo $material['id_material']; ?>" class="btn" style="background: #10b981; color: white;">🔧 Ajuste</a>
+                        <a href="movimientos/ajuste_individual.php?id=<?php echo $material['id_material']; ?>" class="btn btn-success">🔧 Ajuste</a>
                     <?php endif; ?>
 
                     <!--
                     <?php if(tienePermiso('stock.editar')): ?>
-                        <a href="alta/editar.php?id=<?php echo $id; ?>" class="btn" style="background: #f59e0b; color: white;">✏️ Editar</a>
+                        <a href="alta/editar.php?id=<?php echo $id; ?>" class="btn btn-warning">✏️ Editar</a>
                     <?php endif; ?>
                     -->
-                        <a href="index.php" class="btn" style="background: #6c757d; color: white;">← Volver</a>
+                        <a href="index.php" class="btn btn-secondary">← Volver</a>
                 </div>
             </div>
         </div>
@@ -207,7 +209,7 @@ $movimientos = $stmt_mov->fetchAll(PDO::FETCH_ASSOC);
                 <h3>📦 Control de Stock</h3>
                 <div class="detail-row">
                     <span class="detail-label">Stock Actual:</span>
-                    <span class="detail-value" style="font-size: 20px; color: #3b82f6;"><?php echo $material['stock_actual']; ?> unidades</span>
+                    <span class="detail-value stock-actual-value"><?php echo $material['stock_actual']; ?> unidades</span>
                 </div>
                 
                 <?php 
@@ -217,21 +219,21 @@ $movimientos = $stmt_mov->fetchAll(PDO::FETCH_ASSOC);
                     <div class="stock-bar" style="width: <?php echo min($porcentaje, 100); ?>%"></div>
                 </div>
                 
-                <div class="detail-row" style="padding-bottom: 0" !important;>
+                <div class="detail-row pb-0" !important;>
                     <span class="detail-label">Stock Mínimo:</span>
                     <span class="detail-value"><?php echo $material['stock_minimo']; ?></span>
                 </div>
-                <div class="detail-row" style="padding-bottom: 0" !important;>
+                <div class="detail-row pb-0" !important;>
                     <span class="detail-label">Stock Máximo:</span>
                     <span class="detail-value"><?php echo $material['stock_maximo']; ?></span>
                 </div>
-                <div class="detail-row" style="padding-bottom: 0" !important;>
+                <div class="detail-row pb-0" !important;>
                     <span class="detail-label">Punto de Pedido:</span>
                     <span class="detail-value"><?php echo $material['punto_pedido']; ?></span>
                 </div>
-                <div class="detail-row" style="padding-bottom: 0" !important;>
+                <div class="detail-row pb-0" !important;>
                     <span class="detail-label">Clasificación ABC:</span>
-                    <span class="clasificacion-<?php echo $material['clasificacion_abc']; ?>" style="font-size: 18px;">
+                    <span class="clasificacion-<?php echo $material['clasificacion_abc']; ?> fs-18">
                         <?php echo $material['clasificacion_abc']; ?>
                     </span>
                 </div>
@@ -245,18 +247,18 @@ $movimientos = $stmt_mov->fetchAll(PDO::FETCH_ASSOC);
             <div class="detail-card">
                 <h3>📦 Presentaciones Disponibles</h3>
                 <?php if(count($presentaciones) > 0): ?>
-                    <table style="width: 100%; font-size: 14px;">
+                    <table>
                         <thead>
-                            <tr style="background: #f8f9fa;">
-                                <th style="padding: 8px; text-align: left;">Descripción</th>
-                                <th style="padding: 8px; text-align: center;">Nombre comercial</th>
+                            <tr>
+                                <th>Descripción</th>
+                                <th class="text-center">Nombre comercial</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach($presentaciones as $pres): ?>
                                 <tr>
-                                    <td style="padding: 8px;"><strong><?php echo htmlspecialchars($pres['descripcion']); ?></strong></td>
-                                    <td style="padding: 8px; text-align: center;">
+                                    <td><strong><?php echo htmlspecialchars($pres['descripcion']); ?></strong></td>
+                                    <td class="text-center">
                                         <span>
                                             <?php if($material['nombre_comercial']): ?>
                                                 <?php echo htmlspecialchars($material['nombre_comercial']); ?>
@@ -270,9 +272,9 @@ $movimientos = $stmt_mov->fetchAll(PDO::FETCH_ASSOC);
                         </tbody>
                     </table>
                 <?php else: ?>
-                    <p style="color: #999;">No hay presentaciones registradas.</p>
+                    <p class="text-light">No hay presentaciones registradas.</p>
                 <?php endif; ?>
-                <div style="margin-top: 10px;">
+                <div class="mt-10">
                     <a href="alta/presentaciones.php?id=<?php echo $id; ?>" class="btn btn-sm btn-primary">+ Gestionar</a>
                 </div>
             </div>
@@ -306,10 +308,10 @@ $movimientos = $stmt_mov->fetchAll(PDO::FETCH_ASSOC);
         <!-- FILA 2 - FIN -->
     
         <!-- FILA 3: Lotes y Vencimientos -->
-        <div class="detail-card" style="margin-bottom: 20px;">
+        <div class="detail-card mb-20">
             <h3>📅 Lotes y Vencimientos</h3>
             <?php if(count($lotes) > 0): ?>
-                <table style="width: 100%;">
+                <table class="w-100">
                     <thead>
                         <tr>
                             <th>Lote</th>
@@ -330,9 +332,9 @@ $movimientos = $stmt_mov->fetchAll(PDO::FETCH_ASSOC);
                                 <td>
                                     <?php if($lote['dias_para_vencer'] !== null): ?>
                                         <?php if($lote['dias_para_vencer'] < 0): ?>
-                                            <span style="color: #ef4444; font-weight: bold;">Vencido hace <?php echo abs($lote['dias_para_vencer']); ?> días</span>
+                                            <span class="text-danger fw-bold">Vencido hace <?php echo abs($lote['dias_para_vencer']); ?> días</span>
                                         <?php elseif($lote['dias_para_vencer'] <= 30): ?>
-                                            <span style="color: #f59e0b; font-weight: bold;"><?php echo $lote['dias_para_vencer']; ?> días</span>
+                                            <span class="text-warning fw-bold"><?php echo $lote['dias_para_vencer']; ?> días</span>
                                         <?php else: ?>
                                             <?php echo $lote['dias_para_vencer']; ?> días
                                         <?php endif; ?>
@@ -343,9 +345,9 @@ $movimientos = $stmt_mov->fetchAll(PDO::FETCH_ASSOC);
                                 <td>
                                     <?php
                                     $estado_colors = [
-                                        'VENCIDO' => '#ef4444',
-                                        'PROXIMO_VENCER' => '#f59e0b',
-                                        'VIGENTE' => '#10b981'
+                                        'VENCIDO' => 'text-danger',
+                                        'PROXIMO_VENCER' => 'text-warning',
+                                        'VIGENTE' => 'text-success'
                                     ];
                                     $estado_labels = [
                                         'VENCIDO' => '✗ Vencido',
@@ -353,7 +355,7 @@ $movimientos = $stmt_mov->fetchAll(PDO::FETCH_ASSOC);
                                         'VIGENTE' => '✓ Vigente'
                                     ];
                                     ?>
-                                    <span style="color: <?php echo $estado_colors[$lote['estado_lote']]; ?>; font-weight: bold;">
+                                    <span class="<?php echo $estado_colors[$lote['estado_lote']]; ?> fw-bold">
                                         <?php echo $estado_labels[$lote['estado_lote']]; ?>
                                     </span>
                                 </td>
@@ -364,16 +366,16 @@ $movimientos = $stmt_mov->fetchAll(PDO::FETCH_ASSOC);
                     </tbody>
                 </table>
             <?php else: ?>
-                <p style="color: #999;">No hay lotes con stock disponible.</p>
+                <p class="text-light">No hay lotes con stock disponible.</p>
             <?php endif; ?>
         </div>
         <!-- FILA 3 FIN -->
         
         <!-- FILA 4 INICIO: Costos por Proveedor, con Presentación -->
-        <div class="detail-card" style="margin-bottom: 20px;">
+        <div class="detail-card mb-20">
             <h3>💰 Costos por Proveedor y Presentación</h3>
             <?php if(count($costos) > 0): ?>
-                <table style="width: 100%;">
+                <table class="w-100">
                     <thead>
                         <tr>
                             <th>Proveedor</th>
@@ -393,14 +395,14 @@ $movimientos = $stmt_mov->fetchAll(PDO::FETCH_ASSOC);
                                 <td><strong>$<?php echo number_format($costo['valor_total'], 2); ?></strong></td>
                             </tr>
                         <?php endforeach; ?>
-                        <tr style="background: #f8f9fa; font-weight: bold;">
-                            <td colspan="4" style="text-align: right; padding: 10px;">TOTAL:</td>
-                            <td style="padding: 10px;">$<?php echo number_format(array_sum(array_column($costos, 'valor_total')), 2); ?></td>
+                        <tr class="total-row">
+                            <td colspan="4" class="text-right">TOTAL:</td>
+                            <td>$<?php echo number_format(array_sum(array_column($costos, 'valor_total')), 2); ?></td>
                         </tr>
                     </tbody>
                 </table>
             <?php else: ?>
-                <p style="color: #999;">No hay información de costos disponible.</p>
+                <p class="text-light">No hay información de costos disponible.</p>
             <?php endif; ?>
         </div>
         <!-- FIN FILA 4 -->
@@ -439,11 +441,11 @@ $movimientos = $stmt_mov->fetchAll(PDO::FETCH_ASSOC);
                     </tbody>
                 </table>
                 
-                <div style="text-align: center; margin-top: 15px;">
+                <div class="text-center mt-15">
                     <a href="movimientos.php?id=<?php echo $material['id_material']; ?>" class="btn btn-info">Ver Historial Completo</a>
                 </div>
             <?php else: ?>
-                <p style="text-align: center; color: #999; padding: 20px;">No hay movimientos registrados</p>
+                <p class="empty-message-sm">No hay movimientos registrados</p>
             <?php endif; ?>
         </div>
 
@@ -452,8 +454,8 @@ $movimientos = $stmt_mov->fetchAll(PDO::FETCH_ASSOC);
             <a href="movimientos/ajuste_individual.php?id=<?php echo $material['id_material']; ?>" class="btn btn-success">📝 Registrar Movimiento</a>
             <a href="alta/editar.php?id=<?php echo $material['id_material']; ?>" class="btn btn-warning">✏️ Editar Material</a>
             <a href="alta/eliminar.php?id=<?php echo $material['id_material']; ?>" class="btn btn-danger" onclick="return confirm('¿Está seguro de eliminar este material?')">🗑️ Eliminar</a>
-            <div style="display: flex; gap: 10px;">
-                <a href="index.php" class="btn" style="background: #6c757d; color: white;">← Volver</a>
+            <div class="flex-gap">
+                <a href="index.php" class="btn btn-secondary">← Volver</a>
             </div>
         </div>
     </div>

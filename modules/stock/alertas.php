@@ -81,6 +81,8 @@ foreach($alertas as $alerta) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESIFAR - Alertas de Stock</title>
     <link rel="stylesheet" href="/gesifar/assets/css/style.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/components.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/utilities.css">
     <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock.css">
     <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock_alertas.css">
 </head>
@@ -89,13 +91,13 @@ foreach($alertas as $alerta) {
     
     <div class="container">
         <div class="page-header">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="flex-between">
                 <div>
                     <h1>⚠️ Alertas de Stock</h1>
                     <p>Materiales que requieren atención inmediata</p>
                 </div>
                 <div>
-                    <a href="index.php" class="btn" style="background: #6c757d; color: white;">← Volver al Stock</a>
+                    <a href="index.php" class="btn btn-secondary">← Volver al Stock</a>
                 </div>
             </div>
         </div>
@@ -158,11 +160,11 @@ foreach($alertas as $alerta) {
                                 <td><strong><?php echo htmlspecialchars($mat['codigo']); ?></strong></td>
                                 <td>
                                     <strong><?php echo htmlspecialchars($mat['nombre']); ?></strong><br>
-                                    <small style="color: #666;"><?php echo ucfirst($mat['tipo']); ?></small>
+                                    <small class="text-muted"><?php echo ucfirst($mat['tipo']); ?></small>
                                 </td>
                                 <td>
                                     <strong><?php echo $mat['stock_actual']; ?></strong> / <?php echo $mat['stock_maximo']; ?><br>
-                                    <small style="color: #666;">
+                                    <small class="text-muted">
                                         Mín: <?php echo $mat['stock_minimo']; ?> | 
                                         PP: <?php echo $mat['punto_pedido']; ?>
                                     </small>
@@ -173,7 +175,7 @@ foreach($alertas as $alerta) {
                                 <td>
                                     <?php if($mat['fecha_vencimiento']): ?>
                                         <?php echo date('d/m/Y', strtotime($mat['fecha_vencimiento'])); ?><br>
-                                        <small style="color: <?php echo $mat['dias_vencimiento'] < 0 ? '#ef4444' : ($mat['dias_vencimiento'] <= 30 ? '#f59e0b' : '#666'); ?>;">
+                                        <small class="<?php echo $mat['dias_vencimiento'] < 0 ? 'text-danger' : ($mat['dias_vencimiento'] <= 30 ? 'text-warning' : 'text-muted'); ?>">
                                             (<?php echo $mat['dias_vencimiento']; ?> días)
                                         </small>
                                     <?php else: ?>
@@ -203,7 +205,7 @@ foreach($alertas as $alerta) {
                     <div class="empty-state-icon">✅</div>
                     <h2>¡Todo en orden!</h2>
                     <p>No hay materiales con alertas en este momento</p>
-                    <a href="index.php" class="btn btn-primary" style="margin-top: 20px;">Ver Stock Completo</a>
+                    <a href="index.php" class="btn btn-primary mt-20">Ver Stock Completo</a>
                 </div>
             </div>
         <?php endif; ?>

@@ -63,7 +63,9 @@ $items = $stmt_items->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESIFAR - Detalle Solicitud</title>
     <link rel="stylesheet" href="/gesifar/assets/css/style.css">
-    <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/components.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/utilities.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/modules/solicitudes/solicitudes.css">
     <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock_detail.css">
 </head>
 <body>
@@ -71,27 +73,27 @@ $items = $stmt_items->fetchAll(PDO::FETCH_ASSOC);
     
     <div class="container">
         <div class="page-header">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="flex-between">
                 <div>
                     <h1>📋 <?php echo htmlspecialchars($solicitud['codigo_solicitud']); ?></h1>
                     <p>Detalle completo de la solicitud</p>
                 </div>
                 <div>
-                    <a href="index.php" class="btn" style="background: #6c757d; color: white;">← Volver</a>
+                    <a href="index.php" class="btn btn-secondary">← Volver</a>
                 </div>
             </div>
         </div>
         
         <!-- Estado -->
-        <div style="margin-bottom: 20px;">
+        <div class="mb-20">
             <?php
-            $color = '#666';
-            if($solicitud['id_estado'] == 1) $color = '#f59e0b';
-            if($solicitud['id_estado'] == 2 || $solicitud['id_estado'] == 3) $color = '#10b981';
-            if($solicitud['id_estado'] == 4) $color = '#ef4444';
-            if($solicitud['id_estado'] == 5 || $solicitud['id_estado'] == 6) $color = '#3b82f6';
+            $color = 'estado-sol-otro';
+            if($solicitud['id_estado'] == 1) $color = 'estado-sol-pendiente';
+            if($solicitud['id_estado'] == 2 || $solicitud['id_estado'] == 3) $color = 'estado-sol-aprobada';
+            if($solicitud['id_estado'] == 4) $color = 'estado-sol-rechazada';
+            if($solicitud['id_estado'] == 5 || $solicitud['id_estado'] == 6) $color = 'estado-sol-entregada';
             ?>
-            <span style="background: <?php echo $color; ?>; color: white; padding: 10px 20px; border-radius: 6px; font-weight: bold; font-size: 16px;">
+            <span class="estado-sol-badge <?php echo $color; ?>">
                 <?php echo htmlspecialchars($solicitud['estado_desc']); ?>
             </span>
         </div>
@@ -177,20 +179,20 @@ $items = $stmt_items->fetchAll(PDO::FETCH_ASSOC);
                             <td>
                                 <strong><?php echo htmlspecialchars($item['nombre_solicitado']); ?></strong>
                                 <?php if($item['material_nombre']): ?>
-                                    <br><small style="color: #10b981;">✓ Identificado: <?php echo htmlspecialchars($item['material_nombre']); ?></small>
-                                    <br><small style="color: #666;">Stock: <?php echo $item['stock_actual']; ?></small>
+                                    <br><small class="text-success">✓ Identificado: <?php echo htmlspecialchars($item['material_nombre']); ?></small>
+                                    <br><small class="text-muted">Stock: <?php echo $item['stock_actual']; ?></small>
                                 <?php else: ?>
-                                    <br><small style="color: #f59e0b;">⚠️ No identificado en sistema</small>
+                                    <br><small class="text-warning">⚠️ No identificado en sistema</small>
                                 <?php endif; ?>
                             </td>
                             <td><?php echo $item['cantidad_solicitada']; ?></td>
                             <td>
                                 <?php if($item['aprobado'] === null): ?>
-                                    <span style="color: #f59e0b;">⏳ Pendiente</span>
+                                    <span class="text-warning">⏳ Pendiente</span>
                                 <?php elseif($item['aprobado'] == 1): ?>
-                                    <span style="color: #10b981;">✓ Aprobado</span>
+                                    <span class="text-success">✓ Aprobado</span>
                                 <?php else: ?>
-                                    <span style="color: #ef4444;">✗ Rechazado</span>
+                                    <span class="text-danger">✗ Rechazado</span>
                                 <?php endif; ?>
                             </td>
                             <td>
@@ -223,7 +225,7 @@ $items = $stmt_items->fetchAll(PDO::FETCH_ASSOC);
                 <a href="entregar.php?id=<?php echo $id; ?>" class="btn btn-success">📦 Generar Entrega</a>
             <?php endif; ?>
             
-            <a href="index.php" class="btn" style="background: #6c757d; color: white;">← Volver</a>
+            <a href="index.php" class="btn btn-secondary">← Volver</a>
         </div>
     </div>
     

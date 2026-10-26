@@ -78,14 +78,16 @@ $estados = $db->query("SELECT * FROM estado_solicitud ORDER BY id_estado")->fetc
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESIFAR - Gestión de Solicitudes</title>
     <link rel="stylesheet" href="/gesifar/assets/css/style.css">
-    <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/components.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/utilities.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/modules/solicitudes/solicitudes.css">
 </head>
 <body>
     <?php include '../../includes/header.php'; ?>
     
     <div class="container">
         <div class="page-header">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="flex-between">
                 <div>
                     <h1>📋 Gestión de Solicitudes</h1>
                     <p>Revisar y aprobar solicitudes de materiales</p>
@@ -139,7 +141,7 @@ $estados = $db->query("SELECT * FROM estado_solicitud ORDER BY id_estado")->fetc
                 <input type="text" name="busqueda" placeholder="Código, profesional, DNI..." value="<?php echo htmlspecialchars($busqueda); ?>">
             </div>
             
-            <div class="filter-group" style="max-width: 200px;">
+            <div class="filter-group maxw-200">
                 <label>Estado</label>
                 <select name="estado">
                     <option value="0">Todos</option>
@@ -151,14 +153,14 @@ $estados = $db->query("SELECT * FROM estado_solicitud ORDER BY id_estado")->fetc
                 </select>
             </div>
             
-            <div class="filter-group" style="max-width: 100px;">
+            <div class="filter-group maxw-100">
                 <label>&nbsp;</label>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Filtrar</button>
+                <button type="submit" class="btn btn-primary w-100">Filtrar</button>
             </div>
             
-            <div class="filter-group" style="max-width: 100px;">
+            <div class="filter-group maxw-100">
                 <label>&nbsp;</label>
-                <a href="index.php" class="btn" style="width: 100%; text-align: center; background: #6c757d; color: white;">Limpiar</a>
+                <a href="index.php" class="btn btn-secondary w-100 text-center">Limpiar</a>
             </div>
         </form>
         
@@ -184,24 +186,24 @@ $estados = $db->query("SELECT * FROM estado_solicitud ORDER BY id_estado")->fetc
                                 <td><?php echo date('d/m/Y H:i', strtotime($sol['fecha_solicitud'])); ?></td>
                                 <td>
                                     <strong><?php echo htmlspecialchars($sol['nombre_profesional']); ?></strong>
-                                    <br><small style="color: #666;">DNI: <?php echo htmlspecialchars($sol['dni_profesional']); ?></small>
+                                    <br><small class="text-muted">DNI: <?php echo htmlspecialchars($sol['dni_profesional']); ?></small>
                                 </td>
                                 <td><?php echo htmlspecialchars($sol['servicio']); ?></td>
                                 <td>
                                     <?php echo $sol['total_items']; ?> item(s)
                                     <?php if($sol['items_aprobados'] > 0): ?>
-                                        <br><small style="color: #10b981;">✓ <?php echo $sol['items_aprobados']; ?> aprobados</small>
+                                        <br><small class="text-success">✓ <?php echo $sol['items_aprobados']; ?> aprobados</small>
                                     <?php endif; ?>
                                 </td>
                                 <td>
                                     <?php
-                                    $color = '#666';
-                                    if($sol['id_estado'] == 1) $color = '#f59e0b'; // Pendiente
-                                    if($sol['id_estado'] == 2 || $sol['id_estado'] == 3) $color = '#10b981'; // Aprobada
-                                    if($sol['id_estado'] == 4) $color = '#ef4444'; // Rechazada
-                                    if($sol['id_estado'] == 5 || $sol['id_estado'] == 6) $color = '#3b82f6'; // Entregada
+                                    $color = 'estado-sol-otro';
+                                    if($sol['id_estado'] == 1) $color = 'estado-sol-pendiente'; // Pendiente
+                                    if($sol['id_estado'] == 2 || $sol['id_estado'] == 3) $color = 'estado-sol-aprobada'; // Aprobada
+                                    if($sol['id_estado'] == 4) $color = 'estado-sol-rechazada'; // Rechazada
+                                    if($sol['id_estado'] == 5 || $sol['id_estado'] == 6) $color = 'estado-sol-entregada'; // Entregada
                                     ?>
-                                    <span style="color: <?php echo $color; ?>; font-weight: bold;">
+                                    <span class="estado-sol <?php echo $color; ?>">
                                         <?php echo htmlspecialchars($sol['estado_desc']); ?>
                                     </span>
                                 </td>
@@ -220,7 +222,7 @@ $estados = $db->query("SELECT * FROM estado_solicitud ORDER BY id_estado")->fetc
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="7" style="text-align: center; padding: 40px; color: #999;">
+                            <td class="empty-message" colspan="7">
                                 No se encontraron solicitudes
                             </td>
                         </tr>

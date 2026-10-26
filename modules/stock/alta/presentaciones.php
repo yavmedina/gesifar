@@ -120,8 +120,9 @@ $presentaciones_disponibles = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESIFAR - Presentaciones del Material</title>
     <link rel="stylesheet" href="/gesifar/assets/css/style.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/components.css">
+    <link rel="stylesheet" href="/gesifar/assets/css/utilities.css">
     <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock.css">
-    <link rel="stylesheet" href="/gesifar/assets/css/modules/stock/stock_form.css">
 </head>
 <body>
     <?php include '../../../includes/header.php'; ?>
@@ -165,7 +166,7 @@ $presentaciones_disponibles = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </form>
         </div>
         
-        <div style="margin-top: 40px;">
+        <div class="mt-40">
             <h3 class="section-title">📋 Presentaciones Asignadas</h3>
             
             <?php if(count($presentaciones_asignadas) > 0): ?>
@@ -184,20 +185,20 @@ $presentaciones_disponibles = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     <td><strong><?php echo htmlspecialchars($pres['descripcion']); ?></strong></td>
                                     <td>
                                         <?php if($pres['activo']): ?>
-                                            <span style="color: #10b981; font-weight: bold;">✓ Activo</span>
+                                            <span class="text-success fw-bold">✓ Activo</span>
                                         <?php else: ?>
-                                            <span style="color: #ef4444; font-weight: bold;">✗ Inactivo</span>
+                                            <span class="text-danger fw-bold">✗ Inactivo</span>
                                         <?php endif; ?>
                                     </td>
                                     <td>
                                         <?php if($pres['activo']): ?>
-                                            <form method="POST" style="display: inline;">
+                                            <form class="d-inline" method="POST">
                                                 <input type="hidden" name="accion" value="eliminar">
                                                 <input type="hidden" name="id_presentacion_material" value="<?php echo $pres['id_presentacion_material']; ?>">
                                                 <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Desactivar?')">🗑️ Desactivar</button>
                                             </form>
                                         <?php else: ?>
-                                            <form method="POST" style="display: inline;">
+                                            <form class="d-inline" method="POST">
                                                 <input type="hidden" name="accion" value="activar">
                                                 <input type="hidden" name="id_presentacion_material" value="<?php echo $pres['id_presentacion_material']; ?>">
                                                 <button type="submit" class="btn btn-sm btn-success">✓ Activar</button>
@@ -216,8 +217,8 @@ $presentaciones_disponibles = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <?php endif; ?>
         </div>
         
-        <div class="form-actions" style="margin-top: 30px;">
-            <a href="../../stock/index.php" class="btn" style="background: #6c757d; color: white;">← Volver al Stock</a>
+        <div class="form-actions mt-30">
+            <a href="../../stock/index.php" class="btn btn-secondary">← Volver al Stock</a>
             <a href="editar.php?id=<?php echo $id_material; ?>" class="btn btn-primary">✏️ Editar Material</a>
         </div>
     </div>
